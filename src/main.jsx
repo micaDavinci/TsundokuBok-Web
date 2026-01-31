@@ -18,13 +18,18 @@ createRoot(document.getElementById('root')).render(
      {/*<App /> */}
 
     <div className="d-flex">
-      <Menu />
+      <div className='col-3'>
+        <Menu />
+      </div>
+      <div className='col-9'>
         <main className="flex-grow-1 with-sidebar">
-          {/*<Biblioteca />*/}
-          {/*<Estante />*/}
-          {/*<ListaDeDeseo />*/}
-          <Prestamo />
+        {/*<Biblioteca />*/}
+        {/*<Estante />*/}
+        {/*<ListaDeDeseo />*/}
+        <Prestamo />
         </main>
+      </div>
+      
     </div>
     <Footer/>
   </StrictMode>,
