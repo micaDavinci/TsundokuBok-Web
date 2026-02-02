@@ -1,7 +1,7 @@
 export const Estanteria = (props) => {
     return(
-        <>
-        <div className="col-sm-6 col-md-3 col-lg-3 p-3 m-2 bg-grisO rounded">
+        <div className="col-sm-6 col-md-3 ">
+        <div className="bg-grisO p-3 rounded">
             <a href="#" className="link-offset-2 link-underline link-underline-opacity-0">
                 <div className='row'>
                     <div className="col-6 color-rosaO">{props.nombre}</div>
@@ -9,6 +9,6 @@ export const Estanteria = (props) => {
                 </div>
             </a>        
         </div>
-        </>
+        </div>
     )
 }

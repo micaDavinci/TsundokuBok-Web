@@ -1,4 +1,21 @@
+.app-layout {
+  display: flex;
+  min-height: calc(100vh - 56px); /* 56px ≈ navbar */
+}
 
+/* Sidebar */
+.sidebar {
+  width: 15%;
+  flex-shrink: 0;
+}
+
+/* Contenido principal */
+.with-sidebar {
+  flex: 1;
+  width: 100%;
+  min-width: 0; /* 🔑 MUY IMPORTANTE */
+  padding: 1rem;
+}
 /* Estilos originales de App.css
 #root {
   max-width: 1280px;
