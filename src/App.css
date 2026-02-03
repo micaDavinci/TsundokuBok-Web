@@ -3,6 +3,11 @@
   min-height: calc(100vh - 56px); /* 56px ≈ navbar */
 }
 
+.public-layout {
+  display: fluid;
+  min-height: calc(100vh - 56px); /* 56px ≈ navbar */
+}
+
 /* Sidebar */
 .sidebar {
   width: 15%;

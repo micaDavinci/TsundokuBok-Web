@@ -16,16 +16,16 @@ export const Menu = () => {
         <div className="offcanvas-body p-0">
           <ul className="nav flex-column nav-pills p-2 gap-2">
             <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/biblioteca" > <i className="bi bi-house-door"></i>Biblioteca </Link>
+              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/mi-biblioteca/biblioteca" > <i className="bi bi-house-door"></i>Biblioteca </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/lista-de-deseos"> <i className="bi bi-calendar"></i>Lista de deseos</Link>
+              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/mi-biblioteca/lista-de-deseos"> <i className="bi bi-calendar"></i>Lista de deseos</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link d-flex align-items-center gap-2 color-rosaT disabled" to=""> <i className="bi bi-folder"></i>Nuevo libro</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/prestamos"> <i className="bi bi-folder"></i> Préstamos</Link>
+              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/mi-biblioteca/prestamos"> <i className="bi bi-folder"></i> Préstamos</Link>
             </li>
           </ul>
         </div>

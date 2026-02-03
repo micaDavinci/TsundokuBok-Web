@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 export const Home = () => {
     return (
-        <div className='conteinter'>
+        <div className='public-layout'>
             <div className="row justify-content-center m-5 pb-5">
                 <div className="col-sm-12 col-md-6 col-lg-6 text-center">
                     <h1 className="color-rosaO">Leé. Recordá. Deseá.</h1>
