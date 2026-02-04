@@ -4,11 +4,7 @@ import { LibroDeseado } from './LibroDeseado'
 export const ListaDeDeseo = (props) => {
     return(
         <>
-        <h1 className='color-rosaT'>Lista de deseos</h1>
-        <nav aria-label="breadcrumb">
-            <ol className="breadcrumb">
-            </ol>
-        </nav>
+        <h1 className='color-rosaT mb-4'>Lista de deseos</h1>
 
         <div className='row'>
             <LibroDeseado titulo="Imperio de tormentas" autor="Sarah J. Maas" prioridad="ALTA" genero="Literatura fantástica"/>

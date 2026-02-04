@@ -4,7 +4,7 @@ import { EstanteList } from './EstanteList'
 export const Biblioteca = () => {
     return(
         <>
-            <h1 className='color-rosaT'>Biblioteca</h1>
+            <h1 className='color-rosaT mb-4'>Biblioteca</h1>
             <div className='row g-3'>
                 <EstanteList nombre="Fantasía" cantidad="8"/>
                 <EstanteList nombre="Ficción" cantidad="5"/>
