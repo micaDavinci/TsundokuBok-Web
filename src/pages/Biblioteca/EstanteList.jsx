@@ -8,7 +8,7 @@ export const EstanteList = (props) => {
                 <Link className="link-offset-2 link-underline link-underline-opacity-0" to="/mi-biblioteca/estante" >
                     <Row>
                         <Col className="color-rosaO">{props.nombre}</Col>
-                        <Col className="text-end color-verdeO">Cant: {props.cantidad}</Col>
+                        <Col className="text-end color-verdeO">Cant.: {props.cantidad}</Col>
                     </Row>
                 </Link>
             </div>
