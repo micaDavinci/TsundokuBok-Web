@@ -1,3 +1,4 @@
+import { Container } from 'react-bootstrap'
 import { Routes, Route } from 'react-router-dom'
 
 import { Menu } from '../components/Menu'
@@ -13,7 +14,7 @@ export const PrivateApp = () => {
             <div className='app-layout'>
                 <Menu />
                 <main className="with-sidebar">
-                    <div className='conteinte-fluid'>
+                    <Container fluid>
                         <Routes>
                             <Route path='/biblioteca' element={<Biblioteca />} />
                             <Route path='/estante' element={<Estante />} />
@@ -21,7 +22,7 @@ export const PrivateApp = () => {
                             <Route path='/lista-de-deseos' element={<ListaDeDeseo />} />
                             <Route path='/prestamos' element={<Prestamo />} />
                         </Routes>
-                    </div>
+                    </Container>
                 </main>
             </div>
         </>

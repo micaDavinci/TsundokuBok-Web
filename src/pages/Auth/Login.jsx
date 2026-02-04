@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const Login = () => {
 
@@ -18,8 +19,8 @@ export const Login = () => {
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Usuario" />
                 <input type="password" placeholder="Contraseña" />
+                <Button type="submit">Ingresar</Button>
 
-                <button type="submit">Ingresar</button>
             </form>
         </div>
     )

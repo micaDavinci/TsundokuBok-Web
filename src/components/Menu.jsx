@@ -1,35 +1,27 @@
+import { Offcanvas, Nav } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 export const Menu = () => {
   return (
-    <>
-      <div
-        className="sidebar offcanvas-md offcanvas-start"
-        tabIndex="-1"
-        id="sidebarMenu"
-        /* aria-labelledby="sidebarMenuLabel"
-        style={{ width: '240px' }} */
-      >
-        <div className="offcanvas-header d-md-none">
-          <h5 className="offcanvas-title" id="sidebarMenuLabel color-rosaO">Menú</h5>
-        </div>
-        <div className="offcanvas-body p-0">
-          <ul className="nav flex-column nav-pills p-2 gap-2">
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/mi-biblioteca/biblioteca" > <i className="bi bi-house-door"></i>Biblioteca </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/mi-biblioteca/lista-de-deseos"> <i className="bi bi-calendar"></i>Lista de deseos</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT disabled" to=""> <i className="bi bi-folder"></i>Nuevo libro</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center gap-2 color-rosaT" to="/mi-biblioteca/prestamos"> <i className="bi bi-folder"></i> Préstamos</Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </>
+    <Offcanvas
+      show
+      responsive="md"
+      placement="start"
+      style={{ width: 240 }}
+    >
+      <Offcanvas.Header closeButton className="d-md-none">
+        <Offcanvas.Title>Menú</Offcanvas.Title>
+      </Offcanvas.Header>
+
+      <Offcanvas.Body className="p-0">
+        <Nav className="flex-column p-2 gap-2">
+          <Nav.Link as={Link} to="/mi-biblioteca/biblioteca" className="align-items-center color-rosaT">Biblioteca</Nav.Link>
+          <Nav.Link as={Link} to="/mi-biblioteca/lista-de-deseos" className="align-items-center color-rosaT">Lista de deseos</Nav.Link>
+          <Nav.Link disabled className="align-items-center color-rosaT">Nuevo libro</Nav.Link>
+          <Nav.Link as={Link} to="/mi-biblioteca/prestamos" className="align-items-center color-rosaT">Préstamos</Nav.Link>
+        </Nav>
+      </Offcanvas.Body>
+
+    </Offcanvas>
   )
 }
