@@ -20,7 +20,7 @@ export const Biblioteca = () => {
 
             </div>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Nuevo estante</Modal.Title>
                 </Modal.Header>

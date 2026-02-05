@@ -1,16 +1,17 @@
 import { Offcanvas, Nav } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-export const Menu = () => {
+export const Menu = ({ show, onClose }) => {
   return (
     <Offcanvas
-      show
+      show={show}
+      onHide={onClose}
       responsive="md"
       placement="start"
       style={{ width: 240 }}
     >
       <Offcanvas.Header closeButton className="d-md-none">
-        <Offcanvas.Title>Menú</Offcanvas.Title>
+        <Offcanvas.Title className="color-rosaO">Menú</Offcanvas.Title>
       </Offcanvas.Header>
 
       <Offcanvas.Body className="p-0">

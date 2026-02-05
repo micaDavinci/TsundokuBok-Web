@@ -22,6 +22,8 @@ export const Login = () => {
                 <Button type="submit">Ingresar</Button>
 
             </form>
+
+            <Link className="link-offset-2 link-underline link-underline-opacity-0" to="/registro">Registrarse</Link>
         </div>
     )
 }

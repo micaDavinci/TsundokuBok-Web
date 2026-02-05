@@ -1,15 +1,13 @@
 import { Navbar, Container, Button } from 'react-bootstrap'
 import { Link } from "react-router-dom"
 
-export const Nav = () => {
+export const Nav = ({ onMenuOpen }) => {
     return (
         <Navbar bg='dark' variant='dark' expand="md">
             <Container>
                 <Button variant='outline-light'
-                    className="d-md-none me-2"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#sidebarMenu"
-                    aria-controls="sidebarMenu"
+                    className="d-md-none"
+                    onClick={onMenuOpen}
                 >
                     ☰
                 </Button>

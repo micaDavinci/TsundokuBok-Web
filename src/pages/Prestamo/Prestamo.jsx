@@ -13,12 +13,12 @@ export const Prestamo = (props) => {
             <h1 className='color-rosaT mb-4'>Préstamos</h1>
             <div className='d-flex justify-content-end m-4'>
                 <Button className='bg-rosaO' onClick={handleShow}>
-                    Nuevo estante
+                    Nuevo préstamo
                 </Button>
 
             </div>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Nuevo préstamo</Modal.Title>
                 </Modal.Header>

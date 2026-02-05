@@ -4,13 +4,13 @@ import { Link } from "react-router-dom"
 export const LibroInfo = () => {
     return (
         <>
-             <div className='d-flex justify-content-between align-items-center mb-4'>
-                <Link to="/mi-biblioteca/estante">Estante</Link>
-                <Button as={Link} to="" className='bg-grisO me-4'>
+            <div className='d-flex justify-content-between align-items-center mb-4'>
+                <Link to="/mi-biblioteca/estante">Volver</Link>
+                <Button as={Link} to="/mi-biblioteca/editar-libro" className='bg-grisO me-4'>
                     ✏️ Editar
                 </Button>
-
             </div>
+            
             {/* Información general */}
             <Row className="mb-4">
                 <Col sm={12} md={3} lg={3}>
@@ -31,7 +31,7 @@ export const LibroInfo = () => {
                 </Col>
             </Row>
 
-            <Accordion defaultActiveKey="0">
+            <Accordion defaultActiveKey={['0']} alwaysOpen>
                 {/* Sección de reseña */}
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Reseña</Accordion.Header>

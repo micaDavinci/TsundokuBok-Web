@@ -20,7 +20,7 @@ export const Estante = (props) => {
 
             </div>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Editar estante</Modal.Title>
                 </Modal.Header>

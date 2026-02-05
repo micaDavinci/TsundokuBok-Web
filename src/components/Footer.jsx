@@ -18,10 +18,7 @@ export const Footer = () => {
                         <h5>Ayuda</h5>
                         <ul className="list-unstyled">
                             <li>
-                                <Link className="link-offset-2 link-underline link-underline-opacity-0 color-verdeO" to="">Contacto</Link>
-                            </li>
-                            <li>
-                                <Link className="link-offset-2 link-underline link-underline-opacity-0 color-girsC" to="">Documentación</Link>
+                                <Link className="link-offset-2 link-underline link-underline-opacity-0 color-verdeO" to="/contacto">Contacto</Link>
                             </li>
                         </ul>
                     </Col>

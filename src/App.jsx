@@ -2,14 +2,15 @@ import './App.css'
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { PublicApp } from './Layouts/PublicApp'
-import { PrivateApp } from './Layouts/PrivateApp'
+
 import { Nav } from './components/Nav'
 import { Footer } from './components/Footer'
+import { PrivateApp } from './layouts/PrivateApp'
 
 export const App = () => {
     return (
         <BrowserRouter>
-            <Nav />
+            {/* <Nav /> */}
 
             <Routes>
                 {/* Público */}
@@ -19,7 +20,7 @@ export const App = () => {
                 <Route path="/mi-biblioteca/*" element={<PrivateApp />} />
             </Routes>
 
-            <Footer />
+            {/* <Footer /> */}
         </BrowserRouter>
     )
 }
