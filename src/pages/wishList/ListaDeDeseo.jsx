@@ -6,7 +6,7 @@ export const ListaDeDeseo = (props) => {
     return (
         <>
             <h1 className='color-rosaT mb-4'>Lista de deseos</h1>
-            <Row xs={1} md={2} className="g-4">
+            <Row xs={1} md={2} className="g-4 mt-4">
                 <LibroDeseado titulo="Imperio de tormentas" autor="Sarah J. Maas" prioridad="ALTA" genero="Literatura fantástica" />
                 <LibroDeseado titulo="Caraval" autor="Stephanie Garber" prioridad="MEDIA" genero="Novela" />
                 <LibroDeseado titulo="Asesino de brujas" autor="Shelby Mahurin" prioridad="BAJA" genero="Literatura fantástica" />

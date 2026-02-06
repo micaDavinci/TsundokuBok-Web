@@ -8,7 +8,7 @@ export const Footer = () => {
                 <Row>
                     <Col md={4} lg={4} className="mb-3">
                         <Link to="/" className="d-flex align-items-center text-decoration-none">
-                            <img src="./img/logo.png" alt="Logo" height="30" className="d-inline-block align-text-top" />
+                            <img src="../img/logo.png" alt="Logo" height="30" className="d-inline-block align-text-top" />
                             <span className="fs-5 color-rosaT"> Tsundoku</span>
                             <span className="fs-5 color-verdeB">Bok</span>
                         </Link>

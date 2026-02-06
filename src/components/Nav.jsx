@@ -13,7 +13,7 @@ export const Nav = ({ onMenuOpen }) => {
                 </Button>
 
                 <Navbar.Brand as={Link} to="/">
-                    <img src="./img/logo.png" alt="Logo" height="30" className="d-inline-block align-text-top" />
+                    <img src="../img/logo.png" alt="Logo" height="30" className="d-inline-block align-text-top" />
                     <span className="color-rosaT"> Tsundoku</span>
                     <span className="color-verdeB">Bok</span>
                 </Navbar.Brand>

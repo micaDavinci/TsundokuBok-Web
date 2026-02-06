@@ -10,10 +10,10 @@ export const Prestamo = (props) => {
     const handleShow = () => setShow(true);
     return (
         <>
-            <h1 className='color-rosaT mb-4'>Préstamos</h1>
-            <div className='d-flex justify-content-end m-4'>
+            <h1 className='color-rosaT'>Préstamos</h1>
+            <div className='d-flex justify-content-end my-2'>
                 <Button className='bg-rosaO' onClick={handleShow}>
-                    Nuevo préstamo
+                    ➕
                 </Button>
 
             </div>
@@ -27,6 +27,7 @@ export const Prestamo = (props) => {
                         <Form.Group className="mb-3">
                             <Form.Label>Libro</Form.Label>
                             <Form.Select>
+                                <option>[Seleccione un libro]</option>
                                 <option value="1">Los juegos del hambre</option>
                                 <option value="2">Una corte de rosas y espinas</option>
                             </Form.Select>
@@ -50,6 +51,7 @@ export const Prestamo = (props) => {
                         <Form.Group className="mb-3">
                             <Form.Label>Estado</Form.Label>
                             <Form.Select>
+                                <option>[Seleccione un estado]</option>
                                 <option value="1">Prestado</option>
                                 <option value="2">Devuelto</option>
                             </Form.Select>

@@ -13,9 +13,9 @@ export const Biblioteca = () => {
         <>
             <h1 className='color-rosaT'>Biblioteca</h1>
 
-            <div className='d-flex justify-content-end m-4'>
+            <div className='d-flex justify-content-end my-2'>
                 <Button className='bg-rosaO' onClick={handleShow}>
-                    Nuevo estante
+                    ➕
                 </Button>
 
             </div>
