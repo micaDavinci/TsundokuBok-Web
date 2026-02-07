@@ -21,6 +21,13 @@
   min-width: 0; /* 🔑 MUY IMPORTANTE */
   padding: 1rem;
 }
+
+.card-shadow {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    background: #2B3035;
+}
 /* Estilos originales de App.css
 #root {
   max-width: 1280px;

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const LibroEdit = () => {
     return (
         <>
-            <h1 className="mb-3">Edición del libro</h1>
+            <h1 className="mb-4">Editar del libro</h1>
             <Form>
                 <Row>
                     <Col sm={12} md={6} lg={6}>

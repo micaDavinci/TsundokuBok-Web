@@ -12,7 +12,7 @@ export const Contacto = () => {
         <Container className="contact-section">
             <Row className="justify-content-center">
                 <Col xs={12} md={8} lg={8}>
-                    <Card className="contact-card p-4">
+                    <Card className="card-shadow p-4">
                         <Card.Body>
                             <h2 className="contact-title text-center">
                                 Contacto

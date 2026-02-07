@@ -2,12 +2,6 @@
     padding: 4rem 1rem;
 }
 
-.contact-card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-}
-
 .contact-title {
     color: #E4DAC9; /* rosa principal */
     font-weight: 600;

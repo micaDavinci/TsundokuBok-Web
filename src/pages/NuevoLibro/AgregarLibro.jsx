@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const AgregarLibro = () => {
     return (
         <>
-            <h1 className='color-rosaT mb-4'>Agregar libro</h1>
+            <h1 className='mb-4'>Agregar libro</h1>
 
             <Form>
                 <Row className="mb-4">

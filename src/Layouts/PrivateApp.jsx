@@ -16,6 +16,8 @@ import { Nav } from '../components/Nav'
 import { NuevoLibro } from '../pages/NuevoLibro/NuevoLibro';
 import { AgregarLibro } from '../pages/NuevoLibro/AgregarLibro';
 import { BuscarLibro } from '../pages/NuevoLibro/BuscarLibro';
+import { Amigos } from '../pages/Amigos/Amigos';
+import { Invitados } from '../pages/Amigos/Invitados';
 
 export const PrivateApp = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -42,7 +44,10 @@ export const PrivateApp = () => {
                             <Route path='/agregar-libro' element={<AgregarLibro />} />
                             <Route path='/buscar-libro' element={<BuscarLibro />} />
 
+                            {/* Lista de deseos */}
                             <Route path='/lista-de-deseos' element={<ListaDeDeseo />} />
+                            <Route path='/amigos' element={<Amigos />} />
+                            <Route path='/invitado' element={<Invitados />} />
 
                             <Route path='/prestamos' element={<Prestamo />} />
                         </Routes>

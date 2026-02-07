@@ -8,7 +8,7 @@ export const LibroDeseado = (props) => {
     const handleShow = () => setShow(true);
     return (
         <Col sm={12} md={6} lg={6}>
-            <Card>
+            <Card className="card-shadow">
                 <Card.Body>
                     <Row>
                         <Col>

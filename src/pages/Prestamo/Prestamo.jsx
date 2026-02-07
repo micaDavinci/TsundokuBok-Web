@@ -10,7 +10,7 @@ export const Prestamo = (props) => {
     const handleShow = () => setShow(true);
     return (
         <>
-            <h1 className='color-rosaT'>Préstamos</h1>
+            <h1>Préstamos</h1>
             <div className='d-flex justify-content-end my-2'>
                 <Button className='bg-rosaO' onClick={handleShow}>
                     ➕

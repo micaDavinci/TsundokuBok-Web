@@ -5,7 +5,7 @@ import { Button, Form, Row } from "react-bootstrap"
 export const BuscarLibro = () => {
     return (
         <>
-            <h1 className='color-rosaT mb-4'>Buscar libro</h1>
+            <h1 className='mb-4'>Buscar libro</h1>
 
             <Row md={3} lg={3}>
                 <Form className="d-flex">

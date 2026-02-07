@@ -11,7 +11,7 @@ export const Biblioteca = () => {
 
     return (
         <>
-            <h1 className='color-rosaT'>Biblioteca</h1>
+            <h1>Biblioteca</h1>
 
             <div className='d-flex justify-content-end my-2'>
                 <Button className='bg-rosaO' onClick={handleShow}>

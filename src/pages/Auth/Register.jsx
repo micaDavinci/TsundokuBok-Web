@@ -12,7 +12,7 @@ export const Register = () => {
         <Container className="register-section">
             <Row className="justify-content-center">
                 <Col xs={12} md={8} lg={8}>
-                    <Card className="register-card">
+                    <Card className="card-shadow">
                         <Card.Body>
                             <h2 className="register-title text-center">
                                 Crear cuenta

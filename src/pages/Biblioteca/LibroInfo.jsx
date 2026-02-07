@@ -18,7 +18,7 @@ export const LibroInfo = () => {
                 </Col>
 
                 <Col sm={12} md={9} lg={9}>
-                    <h1 className="color-rosaT">Título</h1>
+                    <h1>Título</h1>
                     <h2 className="color-rosaO">Autor</h2>
                     <Row>
                         <Col sm={6} md={12} lg={12}>

@@ -2,12 +2,6 @@
     padding: 2rem 1rem;
 }
 
-.register-card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-}
-
 .register-title {
     color: #E4DAC9;
     font-weight: 600;

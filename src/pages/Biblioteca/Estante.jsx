@@ -13,7 +13,7 @@ export const Estante = (props) => {
     return (
         <>
             <div className='d-flex justify-content-between align-items-center mb-4'>
-                <h1 className='color-rosaT'>Estante</h1> {/* Nombre del estante */}
+                <h1>Estante</h1> {/* Nombre del estante */}
                 <Button className='bg-grisO me-4' onClick={handleShow}>
                     ✏️
                 </Button>

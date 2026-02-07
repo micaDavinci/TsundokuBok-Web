@@ -45,6 +45,10 @@
   background-color: var(--gris-oscuro);
 }
 
+h1{
+  color: var(--rosa-tsundoku);
+}
+
 /* Estilos originales de index.css
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
