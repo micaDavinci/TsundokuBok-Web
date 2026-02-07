@@ -12,8 +12,8 @@ export const Prestamo = (props) => {
         <>
             <h1>Préstamos</h1>
             <div className='d-flex justify-content-end my-2'>
-                <Button className='bg-rosaO' onClick={handleShow}>
-                    ➕
+                <Button className='button-rosa' onClick={handleShow}>
+                    <i class="bi bi-plus-lg"> Nuevo</i>
                 </Button>
 
             </div>
@@ -62,7 +62,7 @@ export const Prestamo = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button className='button-save' onClick={handleClose}>
                         Guardar
                     </Button>
                 </Modal.Footer>

@@ -15,11 +15,11 @@ export const BuscarLibro = () => {
                         className="me-2"
                         aria-label="Search"
                     />
-                    <Button variant="outline-success">Search</Button>
+                    <Button variant="outline-secondary"><i class="bi bi-search"></i></Button>
                 </Form>
             </Row>
 
-            <Link to="/mi-biblioteca/nuevo-libro" className="d-flex justify-content-end mt-2">Volver</Link>
+            <Link to="/mi-biblioteca/nuevo-libro" className="d-flex justify-content-end mt-2 link-rosa"><i class="bi bi-chevron-left"> Volver</i></Link>
 
             <Row xs={3} md={4} className="g-3 mt-1">
                 <Resultado />

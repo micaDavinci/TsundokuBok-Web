@@ -65,7 +65,7 @@ export const LibroPrestado = (props) => {
                                     <Button variant="secondary" onClick={handleClose}>
                                         Cancelar
                                     </Button>
-                                    <Button variant="primary" onClick={handleClose}>
+                                    <Button className="button-save" onClick={handleClose}>
                                         Guardar
                                     </Button>
                                 </Modal.Footer>

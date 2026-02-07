@@ -9,7 +9,7 @@ export const Nav = ({ onMenuOpen }) => {
                     className="d-md-none"
                     onClick={onMenuOpen}
                 >
-                    ☰
+                    <i class="bi bi-list"></i>
                 </Button>
 
                 <Navbar.Brand as={Link} to="/">
@@ -18,7 +18,7 @@ export const Nav = ({ onMenuOpen }) => {
                     <span className="color-verdeB">Bok</span>
                 </Navbar.Brand>
 
-                <Button as={Link} to="/login" className='justify-content-end bg-verdeO'>Inicio de sesión</Button>
+                <Button as={Link} to="/login" className='justify-content-end button-verde'>Iniciar sesión</Button>
 
             </Container>
 

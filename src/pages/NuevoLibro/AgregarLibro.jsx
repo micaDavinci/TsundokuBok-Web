@@ -88,7 +88,7 @@ export const AgregarLibro = () => {
 
                 <div className="d-flex justify-content-end mt-4">
                     <Button as={Link} to="/mi-biblioteca/nuevo-libro" variant="secondary" className="px-5 mx-2">Cancelar</Button>
-                    <Button variant="primary" className="px-5">Guardar</Button>
+                    <Button className="button-save px-5">Guardar</Button>
                 </div>
 
 

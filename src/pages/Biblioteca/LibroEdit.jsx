@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const LibroEdit = () => {
     return (
         <>
-            <h1 className="mb-4">Editar del libro</h1>
+            <h1 className="mb-4">Editar libro</h1>
             <Form>
                 <Row>
                     <Col sm={12} md={6} lg={6}>
@@ -167,7 +167,7 @@ export const LibroEdit = () => {
 
                 <div className="d-flex justify-content-end mt-4">
                     <Button as={Link} to="/mi-biblioteca/libro" variant="secondary" className="px-5 mx-2">Cancelar</Button>
-                    <Button variant="primary" className="px-5">Guardar</Button>
+                    <Button className="button-save px-5">Guardar</Button>
                 </div>
 
             </Form>

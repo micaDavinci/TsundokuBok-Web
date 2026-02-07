@@ -13,11 +13,11 @@ export const AmigosList = () => {
                 <td>email@gmail.com</td>
                 <td>
                     <div className='d-flex align-items-center justify-content-end'>
-                        <Button className='bg-grisO me-2' onClick={handleShow}>
-                            ✏️
+                        <Button className='button-gris me-2' onClick={handleShow}>
+                            <i class="bi bi-pencil-square"></i>
                         </Button>
-                        <Button className='bg-grisO'>
-                            E
+                        <Button className='button-rosa'>
+                            <i class="bi bi-trash"></i>
                         </Button>
 
                     </div>
@@ -55,7 +55,7 @@ export const AmigosList = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button className="button-save" onClick={handleClose}>
                         Guardar
                     </Button>
                 </Modal.Footer>

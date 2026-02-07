@@ -5,9 +5,9 @@ export const LibroInfo = () => {
     return (
         <>
             <div className='d-flex justify-content-between align-items-center mb-4'>
-                <Link to="/mi-biblioteca/estante">Volver</Link>
-                <Button as={Link} to="/mi-biblioteca/editar-libro" className='bg-grisO me-4'>
-                    ✏️ Editar
+                <Link to="/mi-biblioteca/estante" className="link-rosa"><i class="bi bi-chevron-left"> Volver</i></Link>
+                <Button as={Link} to="/mi-biblioteca/editar-libro" className='button-gris me-4'>
+                    <i class="bi bi-pencil-square"> Editar</i>
                 </Button>
             </div>
             

@@ -5,7 +5,7 @@ export const Invitados = () => {
     return(
         <>
         <h1>BiblioMica</h1>
-        <h2>Lista de deseos de Mica</h2>
+        <h2 className="color-verdeB">Lista de deseos de Mica</h2>
 
         <Row xs={1} md={2} className="g-4 mt-4">
                 <LibroDeseado titulo="Imperio de tormentas" autor="Sarah J. Maas" prioridad="ALTA" genero="Literatura fantástica" />

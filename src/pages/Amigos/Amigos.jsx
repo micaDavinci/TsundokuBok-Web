@@ -24,7 +24,7 @@ export const Amigos = () => {
                             </Col>
 
                             <Col sm={6} md={4} lg={4}>
-                                <Button variant="primary" className="px-5">Guardar</Button>
+                                <Button className="button-save px-5 mt-2">Guardar</Button>
                             </Col>
                         </Row>
                     </Form>

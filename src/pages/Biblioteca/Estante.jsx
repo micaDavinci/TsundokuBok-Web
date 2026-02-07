@@ -14,8 +14,8 @@ export const Estante = (props) => {
         <>
             <div className='d-flex justify-content-between align-items-center mb-4'>
                 <h1>Estante</h1> {/* Nombre del estante */}
-                <Button className='bg-grisO me-4' onClick={handleShow}>
-                    ✏️
+                <Button className='button-gris me-4' onClick={handleShow}>
+                    <i class="bi bi-pencil-square"> Editar</i>
                 </Button>
 
             </div>
@@ -40,7 +40,7 @@ export const Estante = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button className='button-save' onClick={handleClose}>
                         Guardar
                     </Button>
                 </Modal.Footer>

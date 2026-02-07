@@ -14,8 +14,8 @@ export const Biblioteca = () => {
             <h1>Biblioteca</h1>
 
             <div className='d-flex justify-content-end my-2'>
-                <Button className='bg-rosaO' onClick={handleShow}>
-                    ➕
+                <Button className='button-rosa' onClick={handleShow}>
+                    <i class="bi bi-plus-lg"> Nuevo</i>
                 </Button>
 
             </div>
@@ -40,7 +40,7 @@ export const Biblioteca = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button className='button-save' onClick={handleClose}>
                         Guardar
                     </Button>
                 </Modal.Footer>
