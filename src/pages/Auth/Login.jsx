@@ -1,6 +1,8 @@
 import { Container, Form, Button } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import "./login.css"
+import { Mail } from "./Mail"
+import { Contraseña } from "./Constraseña"
 
 export const Login = () => {
     const navigate = useNavigate()
@@ -48,33 +50,11 @@ export const Login = () => {
                                 <h2 className="text-center mb-3">Iniciar sesión</h2>
 
                                 <Form>
-                                    <Form.Group className="mb-2">
-                                        <Form.Label>Mail</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            placeholder="nombre@example.com"
-                                        />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-2">
-                                        <Form.Label>Contraseña</Form.Label>
-                                        <Form.Control type="password" />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3">
-                                        <Form.Label>Biblioteca</Form.Label>
-                                        <Form.Control type="text" />
-                                    </Form.Group>
-
-                                    <p className="text-center small opacity-75">
-                                        ¿No tenés una cuenta?{" "}
-                                        <Link to="/registro" className="link-register">
-                                            Registrate acá
-                                        </Link>
-                                    </p>
+                                    <Mail />
+                                    {/* <Contraseña /> */}
 
                                     <Button
-                                        className="w-100 mt-2"
+                                        className="w-100 mt-2 mb-4"
                                         onClick={handleLogin}
                                     >
                                         Ingresar

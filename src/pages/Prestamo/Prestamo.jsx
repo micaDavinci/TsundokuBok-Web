@@ -48,14 +48,6 @@ export const Prestamo = (props) => {
                                 autoFocus
                             />
                         </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Estado</Form.Label>
-                            <Form.Select>
-                                <option>[Seleccione un estado]</option>
-                                <option value="1">Prestado</option>
-                                <option value="2">Devuelto</option>
-                            </Form.Select>
-                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

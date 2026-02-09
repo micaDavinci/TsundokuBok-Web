@@ -10,6 +10,10 @@ export const LibroDeseado = (props) => {
         <Col sm={12} md={6} lg={6}>
             <Card className="card-shadow">
                 <Card.Body>
+                    <Card.ImgOverlay>
+                        {/* <Card.Title className="color-rosaT bg-verdeO p-2">Este libro ya fue comprado</Card.Title> */}
+                        <Button className="button-gris">Quiero regalar este libro</Button>
+                    </Card.ImgOverlay>
                     <Row>
                         <Col>
                             <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
@@ -20,6 +24,8 @@ export const LibroDeseado = (props) => {
                                     <Dropdown.Toggle variant="secondary" id={props.titulo} size="sm" />
                                     <Dropdown.Menu>
                                         <Dropdown.Item onClick={handleShow}>Editar</Dropdown.Item>
+                                        <Dropdown.Item>Mover a mi biblioteca</Dropdown.Item>
+                                        <Dropdown.Item>Bloquear / Desbloquear</Dropdown.Item>
                                         <Dropdown.Item>Eliminar</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
@@ -64,9 +70,14 @@ export const LibroDeseado = (props) => {
                             <Card.Text className="color-rosaO">{props.autor}</Card.Text>
                             <Card.Text className="color-rosaO">{props.genero}</Card.Text>
                             <Card.Text className="color-rosaO">Prioridad: <Badge bg="secondary">{props.prioridad}</Badge></Card.Text>
+                            <div className="d-flex justify-content-end my-2">
+                                {/* <i class="bi bi-lock-fill"></i> */}
+                                <i class="bi bi-unlock-fill"></i>
+                                
+                            </div>
+
                         </Col>
                     </Row>
-
 
                 </Card.Body>
             </Card>
