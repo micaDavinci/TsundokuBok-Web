@@ -8,8 +8,18 @@ export const Mail = () => {
                 <Form.Label>Mail</Form.Label>
                 <Form.Control
                     type="email"
+                    value={email}
+                    onChange={(e) =>setEmail(e.target.value)}
                     placeholder="nombre@example.com"
                 />
+            </Form.Group>
+
+            <Form.Group className="mt-2 mb-4 pb-4">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                    type="password"
+                    value={contrasena}
+                    onChange={(e) => setContrasena(e.target.value)} />
             </Form.Group>
 
             <Form.Group className="mb-2">
