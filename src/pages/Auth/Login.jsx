@@ -2,20 +2,20 @@ import { Container, Form, Button } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import "./login.css"
-import { Mail } from "./Mail"
-import { Contraseña } from "./Constraseña"
 import axios from "axios";
 
 export const Login = () => {
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("");
+    const [biblioteca, setBiblioteca] = useState("");
     const [contrasena, setContrasena] = useState("");
     const handleLogin = async () => {
         // login simulado
         try {
             const request = await axios.post("http://localhost:8888/login", {
                 email,
+                biblioteca,
                 contrasena
             });
             if (request.data.succes) {
@@ -76,17 +76,19 @@ export const Login = () => {
                                         />
                                     </Form.Group>
 
-                                    <Form.Group className="mt-2 mb-4 pb-4">
+                                    <Form.Group className="mb-2">
+                                        <Form.Label>Biblioteca</Form.Label>
+                                        <Form.Control type="text"
+                                            value={biblioteca}
+                                            onChange={(e) => setBiblioteca(e.target.value)} />
+                                    </Form.Group>
+
+                                    <Form.Group className="mb-2">
                                         <Form.Label>Contraseña</Form.Label>
                                         <Form.Control
                                             type="password"
                                             value={contrasena}
                                             onChange={(e) => setContrasena(e.target.value)} />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-2">
-                                        <Form.Label>Biblioteca</Form.Label>
-                                        <Form.Control type="text" />
                                     </Form.Group>
 
                                     <p className="text-center small opacity-75">
@@ -95,8 +97,6 @@ export const Login = () => {
                                             Registrate acá
                                         </Link>
                                     </p>
-                                    {/* <Mail /> */}
-                                    {/* <Contraseña /> */}
 
                                     <Button
                                         className="w-100 mt-2 mb-4"

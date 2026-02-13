@@ -8,7 +8,7 @@ export const Home = () => {
                 <Col sm={12} md={6} lg={6} className="text-center">
                     <h1 className="color-rosaO">Leé. Recordá. Deseá.</h1>
                     <h2 className="color-rosaT">Creá tu rincón lector y compartí tu lista de deseos con quienes más te conocen.</h2>
-                    <Button as={Link} to="/login" className="justify-content-end button-verde">Iniciar sesión</Button>
+                    <Button as={Link} to="/login" className="justify-content-end button-verde">Comenzar</Button>
                 </Col>
             </Row>
 
