@@ -16,15 +16,14 @@ export const Login = () => {
     const [contrasena, setContrasena] = useState("");
 
     const handleLogin = async () => {
-        // login simulado
         try {
             const request = await axios.post("http://localhost:8888/login", {
                 email,
                 biblioteca,
                 contrasena
-            });
-            login();
+            }); 
             if (request.data.succes) {
+                login(request.data.accessToken);
                 navigate("/mi-biblioteca/biblioteca");
             }
             alert(request.data.message);
