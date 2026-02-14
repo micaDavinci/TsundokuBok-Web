@@ -22,8 +22,8 @@ export const Login = () => {
                 biblioteca,
                 contrasena
             }); 
-            if (request.data.succes) {
-                login(request.data.accessToken);
+            if (request.data.success) {
+                login(request.data);
                 navigate("/mi-biblioteca/biblioteca");
             }
             alert(request.data.message);

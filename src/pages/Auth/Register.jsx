@@ -1,5 +1,6 @@
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import "./register.css";
+import { Link } from "react-router-dom";
 
 export const Register = () => {
     const handleSubmit = (e) => {
@@ -74,7 +75,8 @@ export const Register = () => {
 
                                 <div className="register-footer text-center">
                                     ¿Ya tenés cuenta?{" "}
-                                    <a href="/login">Iniciar sesión</a>
+                                    <Link to="/login">Iniciar sesión </Link>
+
                                 </div>
                             </Form>
                         </Card.Body>

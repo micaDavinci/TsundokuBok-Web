@@ -4,8 +4,7 @@ import { useAuth } from '../context/AuthContext'
 
 export const Nav = ({ onMenuOpen }) => {
 
-    const { logueado } = useAuth();
-    const {logout} = useAuth();
+    const { logueado, logout } = useAuth();
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -20,7 +19,7 @@ export const Nav = ({ onMenuOpen }) => {
                     className="d-md-none"
                     onClick={onMenuOpen}
                 >
-                    <i class="bi bi-list"></i>
+                    <i className="bi bi-list"></i>
                 </Button>
 
                 <Navbar.Brand as={Link} to="/">

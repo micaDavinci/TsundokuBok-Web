@@ -1,7 +1,31 @@
 import { Offcanvas, Nav } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 export const Menu = ({ show, onClose }) => {
+
+  const { token } = useAuth();
+
+    useEffect(() => {
+        if (token) {
+        getWelcome();
+    }
+    }, []);
+
+    const getWelcome = async () => {
+        try {
+            const request = await axios.get("http://localhost:8888/welcome", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        } catch (error) {
+            alert("Ha surgido un error, por favor intente más tarde");
+        }
+    }
+
   return (
     <Offcanvas
       show={show}

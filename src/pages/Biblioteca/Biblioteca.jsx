@@ -1,32 +1,10 @@
 import { Row, Button, Form, Modal } from 'react-bootstrap'
 import { useState } from 'react';
-import axios from 'axios';
-import { useEffect } from 'react';
-
-import { useAuth } from '../../context/AuthContext';
 import { EstanteList } from './EstanteList'
 
 import '../../App.css'
 
 export const Biblioteca = () => {
-
-    const { token } = useAuth();
-
-    useEffect(() => {
-        getWelcome();
-    }, []);
-
-    const getWelcome = async () => {
-        try {
-            const request = await axios.get("http://localhost:8888/welcome", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-        } catch (error) {
-            alert("Ha surgido un error, por favor intente más tarde");
-        }
-    }
 
     const [show, setShow] = useState(false);
 

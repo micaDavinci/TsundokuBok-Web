@@ -47,7 +47,7 @@ export const App = () => {
                     {/*Rutas privadas simuladas */}
                     <Route path="/mi-biblioteca/*" element={<PrivateApp />} />
                 </Routes>
-
+                
                 {/* {
                     (logueado)
                         ?
