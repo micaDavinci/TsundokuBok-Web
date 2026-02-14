@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import { api } from "../api/axios";
 
 const AuthContext = createContext();
 
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     const doRefreshToken = async () => {
         if (localStorage.getItem("token")) {
             try {
-                const request = await axios.get("http://localhost:8888/refresh-token", {
+                const request = await api.get("/refresh-token", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`
                     }

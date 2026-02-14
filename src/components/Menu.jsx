@@ -1,7 +1,7 @@
 import { Offcanvas, Nav } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import { useAuth } from '../context/AuthContext';
-import axios from 'axios';
+import { api } from "../api/axios";
 import { useEffect } from 'react';
 
 export const Menu = ({ show, onClose }) => {
@@ -16,7 +16,7 @@ export const Menu = ({ show, onClose }) => {
 
     const getWelcome = async () => {
         try {
-            const request = await axios.get("http://localhost:8888/welcome", {
+            const request = await api.get("http://localhost:8888/welcome", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

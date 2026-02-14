@@ -1,11 +1,10 @@
 import { Container, Form, Button } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
-
 import { useAuth } from '../../context/AuthContext'
+import { api } from "../../api/axios"
 
 import "./login.css"
-import axios from "axios";
 
 export const Login = () => {
     const {login} = useAuth();
@@ -17,7 +16,7 @@ export const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const request = await axios.post("http://localhost:8888/login", {
+            const request = await api.post("/login", {
                 email,
                 biblioteca,
                 contrasena
