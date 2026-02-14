@@ -1,7 +1,18 @@
 import { Navbar, Container, Button, Dropdown } from 'react-bootstrap'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from '../context/AuthContext'
 
 export const Nav = ({ onMenuOpen }) => {
+
+    const { logueado } = useAuth();
+    const {logout} = useAuth();
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        logout();
+        navigate("/")
+    }
+
     return (
         <Navbar bg='dark' variant='dark' expand="md">
             <Container>
@@ -18,21 +29,26 @@ export const Nav = ({ onMenuOpen }) => {
                     <span className="color-verdeB">Bok</span>
                 </Navbar.Brand>
 
-                {/* <Button as={Link} to="/login" className='justify-content-end button-verde'>Iniciar sesión</Button> */}
-                <Dropdown>
-                    <Dropdown.Toggle className='justify-content-end button-verde'>
-                        Iniciar sesión
-                    </Dropdown.Toggle>
+                {
+                    (logueado)
+                        ?
+                        <Button className='justify-content-end button-verde' onClick={handleLogout}>Cerrar sesión</Button>
+                        :
+                        <Dropdown>
+                            <Dropdown.Toggle className='justify-content-end button-verde'>
+                                Iniciar sesión
+                            </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item>
-                            <Link to="/login" className='link-rosa'>Lector</Link>
-                        </Dropdown.Item>
-                        <Dropdown.Item>
-                            <Link to="" className='link-rosa'>Invitado</Link>
-                        </Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
+                            <Dropdown.Menu>
+                                <Dropdown.Item>
+                                    <Link to="/login" className='link-rosa'>Lector</Link>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    <Link to="" className='link-rosa'>Invitado</Link>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                }
 
             </Container>
 

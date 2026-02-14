@@ -24,8 +24,7 @@ export const PrivateApp = () => {
 
     return (
 
-        <>
-            <Nav onMenuOpen={() => setShowMenu(true)} />
+ 
             <div className='app-layout'>
                 <Menu show={showMenu} onClose={() => setShowMenu(false)} />
                 <main className="with-sidebar">
@@ -55,8 +54,6 @@ export const PrivateApp = () => {
                     </Container>
                 </main>
             </div>
-            <Footer />
-        </>
     )
 }
 

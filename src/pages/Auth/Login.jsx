@@ -1,15 +1,20 @@
 import { Container, Form, Button } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
+
+import { useAuth } from '../../context/AuthContext'
+
 import "./login.css"
 import axios from "axios";
 
 export const Login = () => {
+    const {login} = useAuth();
     const navigate = useNavigate()
 
     const [email, setEmail] = useState("");
     const [biblioteca, setBiblioteca] = useState("");
     const [contrasena, setContrasena] = useState("");
+
     const handleLogin = async () => {
         // login simulado
         try {
@@ -18,8 +23,9 @@ export const Login = () => {
                 biblioteca,
                 contrasena
             });
+            login();
             if (request.data.succes) {
-                navigate("/mi-biblioteca/biblioteca")
+                navigate("/mi-biblioteca/biblioteca");
             }
             alert(request.data.message);
         } catch {
