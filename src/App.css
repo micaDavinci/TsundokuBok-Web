@@ -87,6 +87,21 @@
   color: var(--rosa-oscuro) !important;
 }
 
+.link-verde {
+  color: var(--verde-bok);
+  text-decoration: none;
+}
+
+.link-verde:hover {
+  text-decoration: underline;
+}
+
+.link-verde:hover,
+.link-verde:focus,
+.link-verde.active {
+  color: var(--verde-oscuro) !important;
+}
+
 .form-control:focus,
 .form-select:focus,
 textarea:focus {
