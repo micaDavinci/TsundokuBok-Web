@@ -1,12 +1,39 @@
 import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
 import "./register.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { api } from "../../api/axios"
 
 export const Register = () => {
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // más adelante va la lógica real
-        console.log("Registro enviado");
+    const navigate = useNavigate()
+
+    const [nombre, setNombre] = useState("");
+    const [biblioteca, setBiblioteca] = useState("");
+    const [email, setEmail] = useState("");
+    const [contrasena, setContrasena] = useState("");
+    const [contrasenaRepetida, setContrasenaRepetida] = useState("");
+
+    const handleRegister = async () => {
+        try {
+            const request = await api.post("/register", {
+                nombre,
+                biblioteca,
+                email,
+                contrasena,
+                contrasenaRepetida
+            });
+            if (request.data.success) {
+                navigate("/login");
+            }
+            alert(request.data.message);
+
+        } catch (error) {
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
+        }
     };
 
     return (
@@ -23,55 +50,72 @@ export const Register = () => {
                                 Registrate para empezar a organizar tu biblioteca
                             </p>
 
-                            <Form onSubmit={handleSubmit} className="p-4">
-                                <Form.Group className="mb-3" controlId="registerName">
+                            <Form className="p-4">
+                                <Form.Group className="mb-3">
                                     <Form.Label>Nombre de usuario</Form.Label>
                                     <Form.Control
                                         type="text"
+                                        value={nombre}
+                                        onChange={(e) => setNombre(e.target.value)}
                                         placeholder="Tu nombre"
                                         required
                                     />
                                 </Form.Group>
 
-                                 <Form.Group className="mb-3" controlId="registerLibrary">
+                                <Form.Group className="mb-3">
                                     <Form.Label>Nombre de biblioteca</Form.Label>
                                     <Form.Control
                                         type="text"
+                                        value={biblioteca}
+                                        onChange={(e) => setBiblioteca(e.target.value)}
                                         placeholder="Tu biblioteca"
                                         required
                                     />
                                 </Form.Group>
 
-                                <Form.Group className="mb-3" controlId="registerEmail">
+                                <Form.Group className="mb-3">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         placeholder="tu@email.com"
                                         required
                                     />
                                 </Form.Group>
 
-                                <Form.Group className="mb-3" controlId="registerPassword">
+                                <Form.Group className="mb-3">
                                     <Form.Label>Contraseña</Form.Label>
                                     <Form.Control
                                         type="password"
+                                        value={contrasena}
+                                        onChange={(e) => setContrasena(e.target.value)}
                                         placeholder="********"
                                         required
                                     />
                                 </Form.Group>
 
-                                <Form.Group className="mb-4" controlId="registerPasswordRepeat">
+                                <Form.Group className="mb-4">
                                     <Form.Label>Repetir contraseña</Form.Label>
                                     <Form.Control
                                         type="password"
+                                        value={contrasenaRepetida}
+                                        onChange={(e) => setContrasenaRepetida(e.target.value)}
                                         placeholder="********"
                                         required
                                     />
                                 </Form.Group>
 
-                                <Button type="submit" className="register-button">
+                                <Button
+                                    className="register-button"
+                                    onClick={handleRegister}
+                                >
                                     Crear cuenta
                                 </Button>
+
+                                {/* <Button type="submit" className="register-button">
+                                    Crear cuenta
+                                </Button> */}
 
                                 <div className="register-footer text-center">
                                     ¿Ya tenés cuenta?{" "}
