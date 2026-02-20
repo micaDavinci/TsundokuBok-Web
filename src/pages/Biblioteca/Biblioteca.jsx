@@ -85,7 +85,6 @@ export const Biblioteca = () => {
                             <Form.Label>Nombre</Form.Label>
                             <Form.Control
                                 type="text"
-
                                 value={nombre}
                                 onChange={(e) => setNombre(e.target.value)}
                                 placeholder="Nombre"

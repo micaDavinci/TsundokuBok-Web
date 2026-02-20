@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Badge, Card, Col, Row, Dropdown, Modal, Form, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
-export const LibroList = (props) => {
+export const LibroList = (libro) => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -62,12 +62,12 @@ export const LibroList = (props) => {
                             <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
                         </Col>
                         <Col>
-                            <Link to="/mi-biblioteca/libro" className="link-offset-2 link-underline link-underline-opacity-0">
-                                <Card.Title className="color-rosaT">{props.titulo}</Card.Title>
-                                <Card.Text className="color-rosaO">{props.autor}</Card.Text>
+                            <Link to={`/mi-biblioteca/libro${libro.id_libro}`} className="link-offset-2 link-underline link-underline-opacity-0">
+                                <Card.Title className="color-rosaT">{libro.titulo}</Card.Title>
+                                <Card.Text className="color-rosaO">{libro.autor}</Card.Text>
                             </Link >
-                            <Card.Text className="color-verdeB">{props.valor}</Card.Text>
-                            <Badge bg="secondary">{props.estado}</Badge>
+                            <Card.Text className="color-verdeB">{libro.valoracion}</Card.Text>
+                            <Badge bg="secondary">{libro.estado}</Badge>
                         </Col>
                     </Row>
                 </Card.Body>
