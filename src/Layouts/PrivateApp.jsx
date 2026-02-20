@@ -32,7 +32,7 @@ export const PrivateApp = () => {
                         <Routes>
                             {/* Biblioteca */}
                             <Route path='/biblioteca' element={<Biblioteca />} />
-                            <Route path='/estante' element={<Estante />} />
+                            <Route path='/estante/:id' element={<Estante />} />
 
                             {/* Reseña */}
                             <Route path='/libro' element={<LibroInfo />} />

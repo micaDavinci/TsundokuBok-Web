@@ -1,12 +1,65 @@
 import { Row, Button, Form, Modal } from 'react-bootstrap'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { api } from "../../api/axios";
 import { EstanteList } from './EstanteList'
 
 import '../../App.css'
 
 export const Biblioteca = () => {
-
+    const { token } = useAuth();
     const [show, setShow] = useState(false);
+    const [estantes, setEstantes] = useState([]);
+    const [nombre, setNombre] = useState("");
+
+    useEffect(() => {
+        if (token) {
+            getEstantes();
+        }
+    }, []);
+
+    const getEstantes = async () => {
+        try {
+            const request = await api.get("/estantes", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (request.data.success) {
+                setEstantes(request.data.result);
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error al recuperar los estantes, por favor intente más tarde");
+        }
+    }
+
+    const handleNew = async () => {
+        try {
+            const request = await api.post("/nuevo-estante",
+                {
+                    nombre
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            if (request.data.success) {
+                await getEstantes();
+                setNombre("");
+                setShow(false);
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error al guardar el estante, por favor intente más tarde");
+        }
+    }
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -17,7 +70,7 @@ export const Biblioteca = () => {
 
             <div className='d-flex justify-content-end my-2'>
                 <Button className='button-rosa' onClick={handleShow}>
-                    <i class="bi bi-plus-lg"> Nuevo</i>
+                    <i className="bi bi-plus-lg"> Nuevo</i>
                 </Button>
 
             </div>
@@ -32,6 +85,9 @@ export const Biblioteca = () => {
                             <Form.Label>Nombre</Form.Label>
                             <Form.Control
                                 type="text"
+
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
                                 placeholder="Nombre"
                                 autoFocus
                             />
@@ -42,20 +98,22 @@ export const Biblioteca = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button className='button-save' onClick={handleClose}>
+                    <Button className='button-save' onClick={handleNew}>
                         Guardar
                     </Button>
                 </Modal.Footer>
             </Modal>
 
             <Row className='g-3'>
-                <EstanteList nombre="Fantasía" cantidad="8" />
-                <EstanteList nombre="Ficción" cantidad="5" />
-                <EstanteList nombre="Romance" cantidad="10" />
-                <EstanteList nombre="ESI" cantidad="3" />
-                <EstanteList nombre="Favoritos" cantidad="6" />
-                <EstanteList nombre="Ebook" cantidad="20" />
-                <EstanteList nombre="Clásicos" cantidad="4" />
+
+                {estantes.length === 0 ? (
+                    <p>No hay estantes creados todavía.</p>
+                ) : (
+                    estantes.map((estante) => (
+                        <EstanteList id_estante={estante.id_estante} nombre={estante.nombre} cantidad_libros={estante.cantidad_libros} />
+                    ))
+
+                )}
             </Row>
         </>
     )
