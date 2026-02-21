@@ -1,7 +1,95 @@
 import { Col, Form, Row, Accordion, Button, FloatingLabel } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { api } from "../../api/axios";
 
 export const LibroEdit = () => {
+    const { id } = useParams();
+    const { token } = useAuth();
+    const navigate = useNavigate()
+
+    const [formData, setformData] = useState({
+        titulo: "",
+        autor: "",
+        formato: "",
+        opinion: "",
+        nota: "",
+        edicion: "",
+        idioma: "",
+        paginas: "",
+        genero: "",
+        sinopsis: "",
+    });
+
+    useEffect(() => {
+        if (token) {
+            getLibro();
+        }
+    }, [])
+
+    useEffect(() => {
+        console.log("formData actualizado:", formData);
+    }, [formData]);
+
+    const getLibro = async () => {
+        try {
+            const request = await api.get(`/ver-libro/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (request.data.success) {
+                const libro = request.data.result[0]
+                setformData({
+                    titulo: libro.titulo ?? "",
+                    autor: libro.autor ?? "",
+                    formato: libro.formato ?? "",
+                    opinion: libro.opinion ?? "",
+                    nota: libro.nota,
+                    edicion: libro.edicion,
+                    idioma: libro.idioma,
+                    paginas: libro.paginas,
+                    genero: libro.genero,
+                    sinopsis: libro.sinopsis,
+                });
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error, por favor intente más tarde");
+        }
+    }
+
+    const handleEditar = async () => {
+        try {
+            const request = await api.put(`/editar-libro/${id}`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (request.data.success) {
+                alert("Libro actualizado correctamente");
+                navigate(`/mi-biblioteca/libro/${id}`);
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error, por favor intente más tarde");
+        }
+    }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setformData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
     return (
         <>
             <h1 className="mb-4">Editar libro</h1>
@@ -10,13 +98,23 @@ export const LibroEdit = () => {
                     <Col sm={12} md={6} lg={6}>
                         <Form.Group className="mb-3" controlId="formTitulo">
                             <Form.Label>Título</Form.Label>
-                            <Form.Control type="text" placeholder="Título" />
+                            <Form.Control
+                                type="text"
+                                placeholder="Título"
+                                value={formData.titulo}
+                                name="titulo"
+                                onChange={handleChange} />
                         </Form.Group>
                     </Col>
                     <Col sm={12} md={6} lg={6}>
                         <Form.Group className="mb-3" controlId="formAutora">
                             <Form.Label>Autor/a</Form.Label>
-                            <Form.Control type="text" placeholder="Autor/a" />
+                            <Form.Control
+                                type="text"
+                                placeholder="Autor/a"
+                                value={formData.autor}
+                                name="autor"
+                                onChange={handleChange} />
                         </Form.Group>
                     </Col>
                     <Col sm={12} md={6} lg={6}>
@@ -47,52 +145,6 @@ export const LibroEdit = () => {
                                         <Form.Control size="sm" type="text" placeholder="DD/MM/AAAA" />
                                     </FloatingLabel>
                                 </Col>
-                                <Form.Check
-                                    type="switch"
-                                    id="switchTerminado"
-                                    label="Marcar como terminado"
-                                    className="my-3 ms-4"
-                                />
-                            </Row>
-
-                            <Row className="mb-3">
-                                <Form.Group className="mb-3" controlId="formReseña">
-                                    <Form.Label>Valoración</Form.Label>
-                                    {['checkbox'].map((type) => (
-                                        <div key={`inline-${type}`} className="mb-3 ms-4">
-                                            <Form.Check
-                                                inline
-                                                name="group1"
-                                                type={type}
-                                                id={`inline-${type}-1`}
-                                            />
-                                            <Form.Check
-                                                inline
-                                                name="group2"
-                                                type={type}
-                                                id={`inline-${type}-2`}
-                                            />
-                                            <Form.Check
-                                                inline
-                                                name="group3"
-                                                type={type}
-                                                id={`inline-${type}-3`}
-                                            />
-                                            <Form.Check
-                                                inline
-                                                name="group4"
-                                                type={type}
-                                                id={`inline-${type}-4`}
-                                            />
-                                            <Form.Check
-                                                inline
-                                                name="group5"
-                                                type={type}
-                                                id={`inline-${type}-5`}
-                                            />
-                                        </div>
-                                    ))}
-                                </Form.Group>
                             </Row>
 
                             <Row className="mb-3">
@@ -109,14 +161,24 @@ export const LibroEdit = () => {
                             <Row className="mb-3">
                                 <Form.Group className="mb-3" controlId="formReseña">
                                     <Form.Label>Reseña</Form.Label>
-                                    <Form.Control as="textarea" rows={3} />
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={5}
+                                        value={formData.opinion}
+                                        name="opinion"
+                                        onChange={handleChange} />
                                 </Form.Group>
                             </Row>
 
                             <Row className="mb-3">
                                 <Form.Group className="mb-3" controlId="formNotas">
                                     <Form.Label>Notas adicionales</Form.Label>
-                                    <Form.Control as="textarea" rows={3} />
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={5}
+                                        value={formData.nota}
+                                        name="nota"
+                                        onChange={handleChange} />
                                 </Form.Group>
                             </Row>
                         </Accordion.Body>
@@ -130,19 +192,34 @@ export const LibroEdit = () => {
                                 <Col sm={12} md={6} lg={6}>
                                     <Form.Group className="mb-3" controlId="formEdicion">
                                         <Form.Label>Edición</Form.Label>
-                                        <Form.Control type="number" placeholder="Año" />
+                                        <Form.Control
+                                            type="number"
+                                            placeholder="Año"
+                                            value={formData.edicion}
+                                            name="edicion"
+                                            onChange={handleChange} />
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={6} lg={6}>
                                     <Form.Group className="mb-3" controlId="formIdioma">
                                         <Form.Label>Idioma</Form.Label>
-                                        <Form.Control type="text" placeholder="Idioma" />
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Idioma"
+                                            value={formData.idioma}
+                                            name="idioma"
+                                            onChange={handleChange} />
                                     </Form.Group>
                                 </Col>
                                 <Col sm={12} md={6} lg={6}>
                                     <Form.Group className="mb-3" controlId="formPaginas">
                                         <Form.Label>Cantidad de páginas</Form.Label>
-                                        <Form.Control type="number" placeholder="Cantidad de páginas" />
+                                        <Form.Control
+                                            type="number"
+                                            placeholder="Cantidad de páginas"
+                                            value={formData.paginas}
+                                            name="paginas"
+                                            onChange={handleChange} />
                                     </Form.Group>
                                 </Col>
                             </Row>
@@ -150,14 +227,24 @@ export const LibroEdit = () => {
                             <Row>
                                 <Form.Group className="mb-3" controlId="formGenero">
                                     <Form.Label>Género/s</Form.Label>
-                                    <Form.Control type="number" placeholder="Genero/s" />
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Genero/s"
+                                        value={formData.genero}
+                                        name="genero"
+                                        onChange={handleChange} />
                                 </Form.Group>
 
                             </Row>
                             <Row className="mb-3">
                                 <Form.Group className="mb-3" controlId="formSinopsis">
                                     <Form.Label>Sinópsis</Form.Label>
-                                    <Form.Control as="textarea" rows={3} />
+                                    <Form.Control
+                                        as="textarea"
+                                        rows={5}
+                                        value={formData.sinopsis}
+                                        name="sinopsis"
+                                        onChange={handleChange} />
                                 </Form.Group>
                             </Row>
 
@@ -166,8 +253,8 @@ export const LibroEdit = () => {
                 </Accordion>
 
                 <div className="d-flex justify-content-end mt-4">
-                    <Button as={Link} to="/mi-biblioteca/libro" variant="secondary" className="px-5 mx-2">Cancelar</Button>
-                    <Button className="button-save px-5">Guardar</Button>
+                    <Button as={Link} to={`/mi-biblioteca/libro/${id}`} variant="secondary" className="px-5 mx-2">Cancelar</Button>
+                    <Button className="button-save px-5" onClick={handleEditar}>Guardar</Button>
                 </div>
 
             </Form>

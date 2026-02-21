@@ -7,7 +7,7 @@ import { api } from "../../api/axios";
 import '../../App.css'
 import { LibroList } from "./LibroList"
 
-export const Estante = (props) => {
+export const Estante = () => {
     const { id } = useParams();
     const { token } = useAuth();
 
