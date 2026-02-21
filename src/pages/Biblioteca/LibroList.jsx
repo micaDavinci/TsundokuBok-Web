@@ -159,7 +159,7 @@ export const LibroList = ({libro, refreshEstante}) => {
                             <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
                         </Col>
                         <Col>
-                            <Link to={`/mi-biblioteca/libro${id_libro}`} className="link-offset-2 link-underline link-underline-opacity-0">
+                            <Link to={`/mi-biblioteca/libro/${id_libro}`} className="link-offset-2 link-underline link-underline-opacity-0">
                                 <Card.Title className="color-rosaT">{titulo}</Card.Title>
                                 <Card.Text className="color-rosaO">{autor}</Card.Text>
                             </Link >
