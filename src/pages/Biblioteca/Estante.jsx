@@ -62,7 +62,7 @@ export const Estante = (props) => {
         }
     }
 
-    const handleEdit = async() => {
+    const handleEdit = async () => {
         try {
             const request = await api.put(`/editar-estante/${id}`,
                 {
@@ -78,7 +78,7 @@ export const Estante = (props) => {
                 handleClose();
                 await getEstanteList();
                 setNombre("");
-                
+
             } else {
                 alert(request.data.message);
             }
@@ -141,7 +141,7 @@ export const Estante = (props) => {
                     <p>No hay libros guardados en el estante todavía.</p>
                 ) : (
                     estanteList.map((libro) => (
-                        <LibroList key={libro.id_libro} id_libro={libro.id_libro} titulo={libro.titulo} autor={libro.autor} estado={libro.estado} valoracion={libro.valoracion}/>
+                        <LibroList key={libro.id_libro} libro={libro} refreshEstante={getEstanteList} />
                     ))
 
                 )}
