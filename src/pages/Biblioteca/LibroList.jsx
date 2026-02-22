@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { api } from "../../api/axios";
 
 export const LibroList = ({libro, refreshEstante}) => {
-    const {id_libro, titulo, autor, estado, valoracion} = libro;
+    const {id_libro, titulo, autor, estado} = libro;
     const { token } = useAuth();
 
     const [estantes, setEstantes] = useState([]);

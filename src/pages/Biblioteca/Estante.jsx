@@ -1,7 +1,6 @@
 import { Breadcrumb, BreadcrumbItem, Row, Button, Form, Modal } from 'react-bootstrap'
 import { useEffect, useState } from 'react';
-import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom"
 import { useAuth } from '../../context/AuthContext';
 import { api } from "../../api/axios";
 import '../../App.css'
