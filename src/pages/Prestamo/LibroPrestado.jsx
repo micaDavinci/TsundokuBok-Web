@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Badge, Card, Col, Row, Dropdown, Modal, Form, Button } from "react-bootstrap"
 
-export const LibroPrestado = (props) => {
+export const LibroPrestado = ({prestamo, getPrestamoList}) => {
+    const {titulo, autor, persona, fecha, estado} = prestamo
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    
     return (
+        <>
         <Col sm={12} md={6} lg={6}>
             <Card className="card-shadow">
                 <Card.Body>
@@ -17,7 +20,7 @@ export const LibroPrestado = (props) => {
                         <Col>
                             <div className="d-flex justify-content-end">
                                 <Dropdown>
-                                    <Dropdown.Toggle variant="secondary" id={props.titulo} size="sm" />
+                                    <Dropdown.Toggle variant="secondary" size="sm" />
                                     <Dropdown.Menu>
                                         <Dropdown.Item>Devuelto</Dropdown.Item>
                                         <Dropdown.Item onClick={handleShow}>Editar</Dropdown.Item>
@@ -26,8 +29,18 @@ export const LibroPrestado = (props) => {
                                 </Dropdown>
                             </div>
 
+                            <Card.Title className="color-rosaT">{titulo}</Card.Title>
+                            <Card.Text className="color-rosaO">{autor}</Card.Text>
+                            <Card.Title className="color-rosaT">{persona}</Card.Title>
+                            <Card.Text className="color-rosaO">Fecha de préstamo: {fecha}</Card.Text>
+                            <Card.Text className="color-verdeO">Estado: <Badge bg="secondary">{estado}</Badge></Card.Text>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
+        </Col>
 
-                            <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                                 <Modal.Header closeButton>
                                     <Modal.Title>Editar préstamo</Modal.Title>
                                 </Modal.Header>
@@ -70,16 +83,6 @@ export const LibroPrestado = (props) => {
                                     </Button>
                                 </Modal.Footer>
                             </Modal>
-
-                            <Card.Title className="color-rosaT">{props.titulo}</Card.Title>
-                            <Card.Text className="color-rosaO">{props.autor}</Card.Text>
-                            <Card.Title className="color-rosaT">{props.persona}</Card.Title>
-                            <Card.Text className="color-rosaO">Fecha de préstamo: {props.fecha}</Card.Text>
-                            <Card.Text className="color-verdeO">Estado: <Badge bg="secondary">{props.estado}</Badge></Card.Text>
-                        </Col>
-                    </Row>
-                </Card.Body>
-            </Card>
-        </Col>
+        </>
     )
 }

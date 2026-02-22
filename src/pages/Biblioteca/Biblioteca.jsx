@@ -75,6 +75,18 @@ export const Biblioteca = () => {
 
             </div>
 
+            <Row className='g-3'>
+
+                {estantes.length === 0 ? (
+                    <p>No hay estantes creados todavía.</p>
+                ) : (
+                    estantes.map((estante) => (
+                        <EstanteList key={estante.id_estante} id_estante={estante.id_estante} nombre={estante.nombre} cantidad_libros={estante.cantidad_libros} />
+                    ))
+
+                )}
+            </Row>
+
             <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Nuevo estante</Modal.Title>
@@ -102,18 +114,6 @@ export const Biblioteca = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
-            <Row className='g-3'>
-
-                {estantes.length === 0 ? (
-                    <p>No hay estantes creados todavía.</p>
-                ) : (
-                    estantes.map((estante) => (
-                        <EstanteList key={estante.id_estante} id_estante={estante.id_estante} nombre={estante.nombre} cantidad_libros={estante.cantidad_libros} />
-                    ))
-
-                )}
-            </Row>
         </>
     )
 }

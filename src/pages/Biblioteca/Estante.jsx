@@ -98,7 +98,29 @@ export const Estante = () => {
                     <i className="bi bi-pencil-square"> Editar</i>
                 </Button>
 
-            </div>
+            </div>    
+
+            <Breadcrumb>
+                <Breadcrumb.Item
+                    linkAs={Link}
+                    linkProps={{ to: "/mi-biblioteca/biblioteca", className: "link-rosa"}}                  
+                >
+                    Biblioteca
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active>{estanteNombre}</Breadcrumb.Item>
+            </Breadcrumb>
+
+            <Row xs={1} md={2} className="g-4">
+
+                {estanteList.length === 0 ? (
+                    <p>No hay libros guardados en el estante todavía.</p>
+                ) : (
+                    estanteList.map((libro) => (
+                        <LibroList key={libro.id_libro} libro={libro} refreshEstante={getEstanteList} />
+                    ))
+
+                )}
+            </Row>
 
             <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
                 <Modal.Header closeButton>
@@ -127,28 +149,6 @@ export const Estante = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-
-            <Breadcrumb>
-                <Breadcrumb.Item
-                    linkAs={Link}
-                    linkProps={{ to: "/mi-biblioteca/biblioteca", className: "link-rosa"}}                  
-                >
-                    Biblioteca
-                </Breadcrumb.Item>
-                <Breadcrumb.Item active>{estanteNombre}</Breadcrumb.Item>
-            </Breadcrumb>
-
-            <Row xs={1} md={2} className="g-4">
-
-                {estanteList.length === 0 ? (
-                    <p>No hay libros guardados en el estante todavía.</p>
-                ) : (
-                    estanteList.map((libro) => (
-                        <LibroList key={libro.id_libro} libro={libro} refreshEstante={getEstanteList} />
-                    ))
-
-                )}
-            </Row>
 
         </>
     )

@@ -23,8 +23,14 @@ export const ListaDeDeseo = () => {
                 }
             });
             if (request.data.success) {
-                const wishlist = request.data.result[0];
-                setWishListId(wishlist.id_estante);
+                const result = request.data.result;
+
+                if (result.length > 0) {
+                    setWishListId(result[0].id_estante);
+                } else {
+                    setWishListId(null);
+                }
+
             } else {
                 alert(request.data.message);
             }
