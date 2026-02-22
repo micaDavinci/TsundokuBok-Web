@@ -28,10 +28,6 @@ export const LibroEdit = () => {
         }
     }, [])
 
-    useEffect(() => {
-        console.log("formData actualizado:", formData);
-    }, [formData]);
-
     const getLibro = async () => {
         try {
             const request = await api.get(`/ver-libro/${id}`, {
@@ -46,12 +42,12 @@ export const LibroEdit = () => {
                     autor: libro.autor ?? "",
                     formato: libro.formato ?? "",
                     opinion: libro.opinion ?? "",
-                    nota: libro.nota,
-                    edicion: libro.edicion,
-                    idioma: libro.idioma,
-                    paginas: libro.paginas,
-                    genero: libro.genero,
-                    sinopsis: libro.sinopsis,
+                    nota: libro.nota ?? "",
+                    edicion: libro.edicion ?? "",
+                    idioma: libro.idioma ?? "",
+                    paginas: libro.paginas ?? "",
+                    genero: libro.genero ?? "",
+                    sinopsis: libro.sinopsis ?? "",
                 });
             } else {
                 alert(request.data.message);

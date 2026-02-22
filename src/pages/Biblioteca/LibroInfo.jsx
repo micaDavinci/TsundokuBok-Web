@@ -37,7 +37,7 @@ export const LibroInfo = () => {
     return (
         <>
             <div className='d-flex justify-content-between align-items-center mb-4'>
-                <Link to={`/mi-biblioteca/estante/${LibroInfo.codigo_estante}`} className="link-rosa"><i class="bi bi-chevron-left"> Volver</i></Link>
+                <Link to={`/mi-biblioteca/estante/${LibroInfo.codigo_estante}`} className="link-rosa"><i className="bi bi-chevron-left"> Volver</i></Link>
                 <Button as={Link} to={`/mi-biblioteca/editar-libro/${LibroInfo.id_libro}`} className='button-gris me-4'>
                     <i className="bi bi-pencil-square"> Editar</i>
                 </Button>

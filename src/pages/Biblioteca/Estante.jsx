@@ -1,4 +1,5 @@
-import { Breadcrumb, BreadcrumbItem, Row, Button, Form, Modal } from 'react-bootstrap'
+import { Row, Button, Form, Modal } from 'react-bootstrap'
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom"
 import { useAuth } from '../../context/AuthContext';
@@ -94,7 +95,7 @@ export const Estante = () => {
             <div className='d-flex justify-content-between align-items-center mb-4'>
                 <h1>{estanteNombre}</h1> {/* Nombre del estante */}
                 <Button className='button-gris me-4' onClick={handleShow}>
-                    <i class="bi bi-pencil-square"> Editar</i>
+                    <i className="bi bi-pencil-square"> Editar</i>
                 </Button>
 
             </div>
@@ -128,10 +129,14 @@ export const Estante = () => {
             </Modal>
 
             <Breadcrumb>
-                <BreadcrumbItem className="color-rosaO">
-                    <Link to="/mi-biblioteca/biblioteca" className="color-rosaO">Biblioteca</Link>
-                </BreadcrumbItem>
-                <Breadcrumb.Item active>{estanteNombre}</Breadcrumb.Item> {/* Nombre del estante */}
+                <Breadcrumb.Item
+                    linkAs={Link}
+                    linkProps={{ to: "/mi-biblioteca/biblioteca", className: "link-rosa"}}
+                    
+                >
+                    Biblioteca
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active>{estanteNombre}</Breadcrumb.Item>
             </Breadcrumb>
 
             <Row xs={1} md={2} className="g-4">
