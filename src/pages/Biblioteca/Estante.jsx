@@ -131,8 +131,7 @@ export const Estante = () => {
             <Breadcrumb>
                 <Breadcrumb.Item
                     linkAs={Link}
-                    linkProps={{ to: "/mi-biblioteca/biblioteca", className: "link-rosa"}}
-                    
+                    linkProps={{ to: "/mi-biblioteca/biblioteca", className: "link-rosa"}}                  
                 >
                     Biblioteca
                 </Breadcrumb.Item>

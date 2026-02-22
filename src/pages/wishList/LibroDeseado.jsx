@@ -11,6 +11,7 @@ export const LibroDeseado = ({ wishListId }) => {
     const { token } = useAuth();
     const [librosList, setLibrosList] = useState([]);
     const [estanteDestino, setEstanteDestino] = useState("");
+    const [nuevaPrioridad, setNuevaPrioridad] = useState("");
     const [estantes, setEstantes] = useState([]);
 
     useEffect(() => {
@@ -55,7 +56,7 @@ export const LibroDeseado = ({ wishListId }) => {
         }
     }
 
-    const handleMove = async () => {
+    const handleMover = async () => {
         try {
             if (!selectedLibro) return;
 
@@ -81,6 +82,57 @@ export const LibroDeseado = ({ wishListId }) => {
             alert("Ha surgido un error al mover el libro, por favor intente más tarde");
         }
     }
+
+    const hanldeEditarPrioridad = async () => {
+        try {
+            const request = await api.put(`/editar-prioridad/${selectedLibro.id_libro}`,
+                {
+                    prioridad: nuevaPrioridad
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            if (request.data.success) {
+                handleClose();
+                getLibrosList();
+                setNuevaPrioridad("");
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error al mover el libro, por favor intente más tarde");
+        }
+    }
+
+    const handleEliminar = async (libro) => {
+        const confirmDelete = window.confirm(
+            "Esta acción es irreversible ¿Está seguro/a de que desea eliminar este libro?"
+        );
+
+        if (!confirmDelete) return;
+        console.log(libro);
+        try {
+            const request = await api.delete(
+                `/eliminar-libro/${libro.id_libro}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (request.data.success) {
+                getLibrosList();
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleShowMove = (libro) => {
         setSelectedLibro(libro);
@@ -120,7 +172,7 @@ export const LibroDeseado = ({ wishListId }) => {
                                                     <Dropdown.Menu>
                                                         <Dropdown.Item onClick={() => handleShowPriority(libro)}>Editar prioridad</Dropdown.Item>
                                                         <Dropdown.Item onClick={() => handleShowMove(libro)} >Mover a mi biblioteca</Dropdown.Item>
-                                                        <Dropdown.Item>Eliminar</Dropdown.Item>
+                                                        <Dropdown.Item onClick={() => handleEliminar(libro)}>Eliminar</Dropdown.Item>
                                                     </Dropdown.Menu>
                                                 </Dropdown>
                                             </div>
@@ -157,10 +209,13 @@ export const LibroDeseado = ({ wishListId }) => {
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Prioridad</Form.Label>
-                                    <Form.Select>
-                                        <option value="1">Alta</option>
-                                        <option value="2">Media</option>
-                                        <option value="2">Baja</option>
+                                    <Form.Select
+                                        value={nuevaPrioridad}
+                                        onChange={(e) => setNuevaPrioridad(e.target.value)}>
+                                        <option>[Seleccionar prioridad]</option>
+                                        <option value="ALTA">Alta</option>
+                                        <option value="MEDIA">Media</option>
+                                        <option value="BAJA">Baja</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Form>
@@ -169,7 +224,7 @@ export const LibroDeseado = ({ wishListId }) => {
                             <Button variant="secondary" onClick={handleClose}>
                                 Cancelar
                             </Button>
-                            <Button className="button-save" onClick={handleClose}>
+                            <Button className="button-save" onClick={hanldeEditarPrioridad}>
                                 Guardar
                             </Button>
                         </Modal.Footer>
@@ -212,7 +267,7 @@ export const LibroDeseado = ({ wishListId }) => {
                             <Button variant="secondary" onClick={handleClose}>
                                 Cancelar
                             </Button>
-                            <Button variant="primary" onClick={handleMove}>
+                            <Button variant="primary" onClick={handleMover}>
                                 Guardar
                             </Button>
                         </Modal.Footer>
