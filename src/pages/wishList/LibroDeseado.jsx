@@ -5,10 +5,13 @@ import { useAuth } from '../../context/AuthContext';
 import { api } from "../../api/axios";
 
 export const LibroDeseado = ({ wishListId }) => {
-    const [show, setShow] = useState(false);
+    const [activeModal, setActiveModal] = useState(null);
+    const [selectedLibro, setSelectedLibro] = useState(null);
 
     const { token } = useAuth();
     const [librosList, setLibrosList] = useState([]);
+    const [estanteDestino, setEstanteDestino] = useState("");
+    const [estantes, setEstantes] = useState([]);
 
     useEffect(() => {
         if (token) {
@@ -34,83 +37,190 @@ export const LibroDeseado = ({ wishListId }) => {
         }
     }
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const getEstantes = async () => {
+        try {
+            const request = await api.get("/estantes", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (request.data.success) {
+                setEstantes(request.data.result);
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error al recuperar los estantes, por favor intente más tarde");
+        }
+    }
+
+    const handleMove = async () => {
+        try {
+            if (!selectedLibro) return;
+
+            const request = await api.put(`/mover-libro/${selectedLibro.id_libro}`,
+                {
+                    id_ubicacion: Number(estanteDestino)
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            if (request.data.success) {
+                handleClose();
+                getLibrosList();
+                setEstanteDestino("");
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error al mover el libro, por favor intente más tarde");
+        }
+    }
+
+    const handleShowMove = (libro) => {
+        setSelectedLibro(libro);
+        getEstantes();
+        setActiveModal("move");
+    }
+
+    const handleShowPriority = (libro) => {
+        setSelectedLibro(libro);
+        setActiveModal("priority");
+    }
+
+    const handleClose = () => {
+        setActiveModal(null);
+        setSelectedLibro(null);
+    };
 
     return (
         <>
             {librosList.length === 0 ? (
                 <p>Todavía no hay libros en la lisa de deseos.</p>
             ) : (
-                
-                librosList.map( (libro) => (
-<Col sm={12} md={6} lg={6}>
-                    <Card className="card-shadow">
-                        <Card.Body>
-                            <Row>
-                                <Col>
-                                    <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
-                                </Col>
-                                <Col>
-                                    <div className="d-flex justify-content-end">
-                                        <Dropdown>
-                                            <Dropdown.Toggle variant="secondary" id={libro.titulo} size="sm" />
-                                            <Dropdown.Menu>
-                                                <Dropdown.Item onClick={handleShow}>Editar</Dropdown.Item>
-                                                <Dropdown.Item>Mover a mi biblioteca</Dropdown.Item>
-                                                <Dropdown.Item>Eliminar</Dropdown.Item>
-                                            </Dropdown.Menu>
-                                        </Dropdown>
-                                    </div>
 
-                                    <Modal show={show} onHide={handleClose} aria-labelledby="contained-modal-title-vcenter" centered>
-                                        <Modal.Header closeButton>
-                                            <Modal.Title>Editar libro deseado</Modal.Title>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            <Form>
-                                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                                    <Form.Label>Título</Form.Label>
-                                                    <Form.Control
-                                                        type="text"
-                                                        placeholder="Título del libro deseado" // Completar con título del libro
-                                                        autoFocus
-                                                        disabled
-                                                    />
-                                                </Form.Group>
-                                                <Form.Group className="mb-3">
-                                                    <Form.Label>Prioridad</Form.Label>
-                                                    <Form.Select>
-                                                        <option value="1">Alta</option>
-                                                        <option value="2">Media</option>
-                                                        <option value="2">Baja</option>
-                                                    </Form.Select>
-                                                </Form.Group>
-                                            </Form>
-                                        </Modal.Body>
-                                        <Modal.Footer>
-                                            <Button variant="secondary" onClick={handleClose}>
-                                                Cancelar
-                                            </Button>
-                                            <Button className="button-save" onClick={handleClose}>
-                                                Guardar
-                                            </Button>
-                                        </Modal.Footer>
-                                    </Modal>
+                <>
+                    {librosList.map((libro) => (
+                        <Col key={libro.id_libro} sm={12} md={6} lg={6}>
+                            <Card className="card-shadow">
+                                <Card.Body>
+                                    <Row>
+                                        <Col>
+                                            <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
+                                        </Col>
+                                        <Col>
+                                            <div className="d-flex justify-content-end">
+                                                <Dropdown>
+                                                    <Dropdown.Toggle variant="secondary" size="sm" />
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item onClick={() => handleShowPriority(libro)}>Editar prioridad</Dropdown.Item>
+                                                        <Dropdown.Item onClick={() => handleShowMove(libro)} >Mover a mi biblioteca</Dropdown.Item>
+                                                        <Dropdown.Item>Eliminar</Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
+                                            </div>
 
-                                    <Card.Title className="color-rosaT">{libro.titulo}</Card.Title>
-                                    <Card.Text className="color-rosaO">{libro.autor}</Card.Text>
-                                    <Card.Text className="color-rosaO">{libro.genero}</Card.Text>
-                                    <Card.Text className="color-rosaO">Prioridad: <Badge bg="secondary">{libro.prioridad}</Badge></Card.Text>
+                                            <Card.Title className="color-rosaT">{libro.titulo}</Card.Title>
+                                            <Card.Text className="color-rosaO">{libro.autor}</Card.Text>
+                                            <Card.Text className="color-rosaO">{libro.genero}</Card.Text>
+                                            <Card.Text className="color-rosaO">Prioridad: <Badge bg="secondary">{libro.prioridad}</Badge></Card.Text>
 
-                                </Col>
-                            </Row>
+                                        </Col>
+                                    </Row>
 
-                        </Card.Body>
-                    </Card>
-                </Col>
-            ))
-            )}
+                                </Card.Body>
+                            </Card>
+                        </Col>
+
+                    ))}
+
+                    <Modal show={activeModal === "priority"} onHide={() => setActiveModal(null)} aria-labelledby="contained-modal-title-vcenter" centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Editar prioridad</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                    <Form.Label>Título</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={selectedLibro?.id || ""}
+                                        placeholder={selectedLibro?.titulo || ""}
+                                        autoFocus
+                                        disabled
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Prioridad</Form.Label>
+                                    <Form.Select>
+                                        <option value="1">Alta</option>
+                                        <option value="2">Media</option>
+                                        <option value="2">Baja</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Cancelar
+                            </Button>
+                            <Button className="button-save" onClick={handleClose}>
+                                Guardar
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                    <Modal show={activeModal === "move"} onHide={() => setActiveModal(null)} aria-labelledby="contained-modal-title-vcenter" centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Mover libro</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="tituloInput">
+                                    <Form.Label>Título</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={selectedLibro?.titulo || ""}
+                                        autoFocus
+                                        disabled
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="estanteriaInput">
+                                    <Form.Label>Mover a</Form.Label>
+                                    <Form.Select
+                                        value={estanteDestino}
+                                        onChange={(e) => setEstanteDestino(e.target.value)}>
+                                        <option>[Estante de destino]</option>
+
+                                        {estantes.map((estante) => (
+                                            <option
+                                                key={estante.id_estante}
+                                                value={estante.id_estante}
+                                            >{estante.nombre}
+                                            </option>
+                                        ))}
+                                    </Form.Select>
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Cancelar
+                            </Button>
+                            <Button variant="primary" onClick={handleMove}>
+                                Guardar
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+
+                </>
+            )
+            }
         </>
 
 

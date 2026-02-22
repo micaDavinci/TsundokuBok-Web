@@ -15,11 +15,6 @@ export const ListaDeDeseo = () => {
         }
     }, [])
 
-    useEffect(() => {
-    console.log("wishListId cambió:", wishListId);
-}, [wishListId]);
-    
-
     const getWishList = async () => {
         try {
             const request = await api.get(`/wish-list`, {

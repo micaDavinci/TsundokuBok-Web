@@ -109,7 +109,7 @@ export const Biblioteca = () => {
                     <p>No hay estantes creados todavía.</p>
                 ) : (
                     estantes.map((estante) => (
-                        <EstanteList id_estante={estante.id_estante} nombre={estante.nombre} cantidad_libros={estante.cantidad_libros} />
+                        <EstanteList key={estante.id_estante} id_estante={estante.id_estante} nombre={estante.nombre} cantidad_libros={estante.cantidad_libros} />
                     ))
 
                 )}
