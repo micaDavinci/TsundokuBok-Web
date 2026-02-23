@@ -19,6 +19,7 @@ import { Register } from './pages/Auth/Register'
 import ProtectedRoute from './context/ProtectedRoute'
 import { PrivateApp } from './layouts/PrivateApp'
 import Error404 from './pages/Error404'
+import { LoginInvitado } from './pages/Auth/LoginInvitado'
 
 
 export const App = () => {
@@ -32,6 +33,7 @@ export const App = () => {
                 <Routes>
                     {/* Rutas públicas */}
                     <Route path='/login' element={<Login />} />
+                    <Route path='/login-invitado' element={<LoginInvitado />} />
                     <Route path='/' element={<Home />} />
                     <Route path='/contacto' element={<Contacto />} />
                     <Route path='/registro' element={<Register />} />

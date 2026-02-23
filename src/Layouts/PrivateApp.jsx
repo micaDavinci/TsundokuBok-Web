@@ -18,6 +18,8 @@ import { AgregarLibro } from '../pages/NuevoLibro/AgregarLibro';
 import { BuscarLibro } from '../pages/NuevoLibro/BuscarLibro';
 import { Amigos } from '../pages/Amigos/Amigos';
 import { Invitados } from '../pages/Amigos/Invitados';
+import { Consultas } from '../pages/Admin/Consultas';
+import { Usuarios } from '../pages/Admin/Usuarios';
 
 export const PrivateApp = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -50,6 +52,10 @@ export const PrivateApp = () => {
                             <Route path='/invitado' element={<Invitados />} />
 
                             <Route path='/prestamos' element={<Prestamo />} />
+
+                            {/* Consultas */}
+                            <Route path='/consultas' element={<Consultas />} /> 
+                            <Route path='/usuarios' element={<Usuarios />} /> 
                         </Routes>
                     </Container>
                 </main>
