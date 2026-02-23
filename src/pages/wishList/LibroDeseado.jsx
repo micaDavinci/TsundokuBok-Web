@@ -114,7 +114,7 @@ export const LibroDeseado = ({ wishListId }) => {
         );
 
         if (!confirmDelete) return;
-        console.log(libro);
+
         try {
             const request = await api.delete(
                 `/eliminar-libro/${libro.id_libro}`,
