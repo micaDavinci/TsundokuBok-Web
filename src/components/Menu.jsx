@@ -16,7 +16,7 @@ export const Menu = ({ show, onClose }) => {
 
     const getWelcome = async () => {
         try {
-            const request = await api.get("http://localhost:8888/welcome", {
+            const request = await api.get(`/welcome`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

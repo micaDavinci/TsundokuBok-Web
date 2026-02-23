@@ -88,7 +88,7 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
 
         } catch (error) {
             console.error(error);
-            alert("Ha surgido un error al mover el libro, por favor intente más tarde");
+            alert("Ha surgido un error, por favor intente más tarde");
         }
     };
 
