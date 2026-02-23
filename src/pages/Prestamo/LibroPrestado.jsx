@@ -4,9 +4,39 @@ import { useAuth } from '../../context/AuthContext';
 import { Badge, Card, Col, Row, Dropdown, Modal, Form, Button } from "react-bootstrap"
 
 export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
-    const { id, titulo, autor, persona, fecha, estado } = prestamo
+    const { id, titulo, autor, persona, fecha_prestamo, estado } = prestamo
     const { token } = useAuth();
     const [show, setShow] = useState(false);
+    const [personaNueva, setPersonaNueva] = useState("");
+    const [fechaNueva, setFechaNueva] = useState("");
+
+    const handleEditar = async (prestamoID) => {
+        try {
+            const request = await api.put(`/editar-prestamo/${prestamoID}`,
+                {
+                    id, 
+                    persona: personaNueva, 
+                    fecha_prestamo: fechaNueva
+                }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            if (request.data.success) {
+                getPrestamoList();
+                handleClose();
+
+                setPersonaNueva("");
+                setFechaNueva("");
+            } else {
+                alert(request.data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error, por favor intente más tarde");
+        }
+    }
 
     const handleFinalizar = async (prestamoID) => {
         const confirmDelete = window.confirm(
@@ -90,7 +120,7 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                                 <Card.Title className="color-rosaT">{titulo}</Card.Title>
                                 <Card.Text className="color-rosaO">{autor}</Card.Text>
                                 <Card.Title className="color-rosaT">{persona}</Card.Title>
-                                <Card.Text className="color-rosaO">Fecha de préstamo: {fecha}</Card.Text>
+                                <Card.Text className="color-rosaO">Fecha de préstamo: {new Date(fecha_prestamo).toLocaleDateString('es-AR')}</Card.Text>
                                 <Card.Text className="color-verdeO">Estado: <Badge bg="secondary">{estado}</Badge></Card.Text>
                             </Col>
                         </Row>
@@ -108,7 +138,7 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                             <Form.Label>Título</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Título del libro prestado" // Completar con título del libro
+                                placeholder={titulo}
                                 autoFocus
                                 disabled
                             />
@@ -118,16 +148,20 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                             <Form.Label>Persona</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Persona" // Nombre de la persona
+                                name="persona"
+                                value={personaNueva}
+                                onChange={(e) => setPersonaNueva(e.target.value)}
+                                placeholder={persona}
                                 autoFocus
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Fecha de préstamo</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="DD/MM/AA" // Fecha de préstamo
-                                autoFocus
+                                type="date"
+                                name="fecha_prestamo"
+                                value={fechaNueva}
+                                onChange={(e) => setFechaNueva(e.target.value)} 
                             />
                         </Form.Group>
                     </Form>
@@ -136,7 +170,7 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancelar
                     </Button>
-                    <Button className="button-save" onClick={handleClose}>
+                    <Button className="button-save" onClick={() => handleEditar(id)}>
                         Guardar
                     </Button>
                 </Modal.Footer>
