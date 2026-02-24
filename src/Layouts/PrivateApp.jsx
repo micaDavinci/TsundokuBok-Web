@@ -24,6 +24,9 @@ import ProtectedRoute from '../context/ProtectedRoute';
 
 export const PrivateApp = () => {
     const [showMenu, setShowMenu] = useState(false)
+    let guest = "GUEST";
+    let admin = "ADMIN";
+    let lector = "LECTOR";
 
     return (
         <div className='app-layout'>
@@ -35,14 +38,14 @@ export const PrivateApp = () => {
                         <Route
                             path='/biblioteca'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <Biblioteca />
                                 </ProtectedRoute>}
                         />
                         <Route
                             path='/estante/:id'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <Estante />
                                 </ProtectedRoute>}
                         />
@@ -51,7 +54,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/libro'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <LibroInfo />
                                 </ProtectedRoute>}
                         />
@@ -59,7 +62,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/libro/:id'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <LibroInfo />
                                 </ProtectedRoute>}
                         />
@@ -67,7 +70,7 @@ export const PrivateApp = () => {
                         <Route
                             path="/editar-libro/:id"
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <LibroEdit />
                                 </ProtectedRoute>}
                         />
@@ -76,7 +79,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/nuevo-libro'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <NuevoLibro />
                                 </ProtectedRoute>}
                         />
@@ -84,7 +87,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/agregar-libro'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <AgregarLibro />
                                 </ProtectedRoute>}
                         />
@@ -92,7 +95,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/buscar-libro'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <BuscarLibro />
                                 </ProtectedRoute>}
                         />
@@ -101,7 +104,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/lista-de-deseos'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <ListaDeDeseo />
                                 </ProtectedRoute>}
                         />
@@ -109,7 +112,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/amigos'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <Amigos />
                                 </ProtectedRoute>}
                         />
@@ -117,7 +120,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/invitado'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "GUEST"]}>
+                                <ProtectedRoute allowedRoles={[admin, guest]}>
                                     <Invitados />
                                 </ProtectedRoute>}
                         />
@@ -125,7 +128,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/prestamos'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
                                     <Prestamo />
                                 </ProtectedRoute>}
                         />
@@ -134,7 +137,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/consultas'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                                <ProtectedRoute allowedRoles={[admin]}>
                                     <Consultas />
                                 </ProtectedRoute>}
                         />
@@ -142,7 +145,7 @@ export const PrivateApp = () => {
                         <Route
                             path='/usuarios'
                             element={
-                                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                                <ProtectedRoute allowedRoles={[admin]}>
                                     <Usuarios />
                                 </ProtectedRoute>}
                         />

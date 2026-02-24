@@ -9,6 +9,9 @@ export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    let guest = "GUEST";
+    let admin = "ADMIN";
+    let lector = "LECTOR";
 
     useEffect(() => {
         const initAuth = async () => {
@@ -18,39 +21,62 @@ export const AuthProvider = ({ children }) => {
         initAuth()
     }, [])
 
+
     const doRefreshToken = async () => {
-        if (localStorage.getItem("token")) {
-            try {
-                const request = await api.get("/refresh-token", {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`
-                    }
-                });
-                if (request.data.success) {
-                    const newAccessToken = request.data.accessToken;
-                    const decoded = jwtDecode(newAccessToken);
+        const refreshToken = localStorage.getItem("token");
+        const authType = localStorage.getItem("authType");
 
-                    setLogueado(true);
-                    setToken(newAccessToken);
+        if (!refreshToken || !authType) {
+            setLoading(false);
+            return;
+        }
 
+        try {
+            const endpoint =
+                authType === guest
+                    ? `/refresh-token-invitado`
+                    : `/refresh-token`;
+
+            const request = await api.get(endpoint, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            if (request.data.success) {
+                const newAccessToken = request.data.accessToken;
+                const decoded = jwtDecode(newAccessToken);
+
+                setLogueado(true);
+                setToken(newAccessToken);
+
+                if (authType === guest) {
+                    setUser({
+                        email: decoded.email,
+                        biblioteca: {
+                            nombre: decoded.biblioteca.nombre
+                        },
+                        role: guest
+                    });
+                } else {
                     setUser({
                         nombre: decoded.nombre,
                         is_admin: decoded.is_admin,
                         biblioteca: {
                             nombre: decoded.biblioteca.nombre
                         },
-                        role: decoded.is_admin ? "ADMIN" : "USER"
+                        role: decoded.is_admin ? admin : lector
                     });
                 }
-            } catch (error) {
-                logout();
-                alert("Ha surgido un error, por favor intente más tarde");
-            } finally {
-                setLoading(false);
             }
-        } else {
+
+        } catch (error) {
+            logout();
+            alert("Ha surgido un error, por favor intente más tarde");
+        } finally {
             setLoading(false);
         }
+
     }
 
     const login = ({ accessToken, refreshToken }) => {
@@ -58,17 +84,29 @@ export const AuthProvider = ({ children }) => {
 
         setLogueado(true);
         setToken(accessToken);
+        if (decoded.role === guest) {
+            setUser({
+                email: decoded.email,
+                biblioteca: {
+                    nombre: decoded.biblioteca.nombre
+                },
+                role: guest
+            });
 
-        setUser({
+            localStorage.setItem("authType", guest);
+        } else {
+            setUser({
             nombre: decoded.nombre,
             is_admin: decoded.is_admin,
             biblioteca: {
                 nombre: decoded.biblioteca.nombre
             },
-            role: decoded.is_admin ? "ADMIN" : "USER"
+            role: decoded.is_admin ? admin : lector
         });
-
+            localStorage.setItem("authType", lector);        
+        }
         localStorage.setItem("token", refreshToken);
+
     }
 
     const logout = () => {

@@ -9,6 +9,9 @@ export const Menu = ({ show, onClose }) => {
   const { token } = useAuth();
   const { user } = useAuth()
   const hasRole = (roles) => roles.includes(user?.role)
+  let guest = "GUEST";
+    let admin = "ADMIN";
+    let lector = "LECTOR";
 
   useEffect(() => {
     if (token) {
@@ -42,7 +45,7 @@ export const Menu = ({ show, onClose }) => {
 
       <Offcanvas.Body className="p-0">
         <Nav className="flex-column p-2 gap-2">
-          {["ADMIN", "USER"].includes(user?.role) && (
+          {[admin, lector].includes(user?.role) && (
             <>
               <Nav.Link as={Link} to="/mi-biblioteca/biblioteca" className="align-items-center color-rosaT link-nav">
                 <i className="bi bi-book-half"> Biblioteca</i>
@@ -65,7 +68,7 @@ export const Menu = ({ show, onClose }) => {
 
 
 
-          {["ADMIN", "GUEST"].includes(user?.role) && (
+          {[admin, guest].includes(user?.role) && (
             <Nav.Link as={Link} to="/mi-biblioteca/invitado" className="align-items-center color-rosaT link-nav">
               <i className="bi bi-person-heart"> Invitado</i>
             </Nav.Link>
@@ -73,7 +76,7 @@ export const Menu = ({ show, onClose }) => {
 
 
 
-          {hasRole(["ADMIN"]) && (
+          {hasRole([admin]) && (
             <>
               <Nav.Link as={Link} to="/mi-biblioteca/usuarios" className="align-items-center color-rosaT link-nav">
                 <i className="bi bi-person-lines-fill"> Usuarios</i>

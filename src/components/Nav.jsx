@@ -43,7 +43,7 @@ export const Nav = ({ onMenuOpen }) => {
                                     <Link to="/login" className='link-rosa'>Lector</Link>
                                 </Dropdown.Item>
                                 <Dropdown.Item>
-                                    <Link to="" className='link-rosa'>Invitado</Link>
+                                    <Link to="/login-invitado" className='link-rosa'>Invitado</Link>
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
