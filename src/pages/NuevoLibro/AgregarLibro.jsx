@@ -1,5 +1,5 @@
 import { Button, Col, Form, Row } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { api } from "../../api/axios";
@@ -7,8 +7,9 @@ import { api } from "../../api/axios";
 export const AgregarLibro = () => {
 
     const { token } = useAuth();
+    const [id_ubicacion, setIdUbicacion] = useState("");
+    const navigate = useNavigate()
 
-    const [id_biblioteca, setIdUbicacion] = useState("");
     const [titulo, seTtitulo] = useState("");
     const [autor, setAutor] = useState("");
     const [edicion, setEdicion] = useState("");
@@ -18,14 +19,24 @@ export const AgregarLibro = () => {
     const [genero, setGenero] = useState("");
     const [portada, setPortada] = useState("");
     const [prioridad, setPriotidad] = useState("");
+    const [destino, setDestino] = useState("");
+
     const [estantes, setEstantes] = useState([]);
+    const [opcionesSegundoCombo, setOpcionesSegundoCombo] = useState([]);
+const [segundoValor, setSegundoValor] = useState("");
+
+    const prioridades = [
+    { id: "alta", nombre: "Alta" },
+    { id: "media", nombre: "Media" },
+    { id: "baja", nombre: "Baja" }
+];
+
 
     const handleNuevo = async (e) => {
         e.preventDefault();
-
         try {
             const request = await api.post(`/nuevo-libro`, {
-                id_biblioteca,
+                id_ubicacion,
                 titulo,
                 autor,
                 edicion,
@@ -52,45 +63,44 @@ export const AgregarLibro = () => {
         }
     }
 
-    // const getEstantes = async () => {
-    //     try {
-    //         const request = await api.get("/estantes", {
-    //             headers: {
-    //                 Authorization: `Bearer ${token}`
-    //             }
-    //         });
-    //         if (request.data.success) {
-    //             setEstantes(request.data.result);
-    //         } else {
-    //             alert(request.data.message);
-    //         }
-    //     } catch (error) {
-    //         console.error(error);
-    //         alert("Ha surgido un error al recuperar los estantes, por favor intente más tarde");
-    //     }
-    // }
 
-    // const [destino, setDestino] = useState("");      // valor del primer combo
-    // const [opcionesSegundoCombo, setOpcionesSegundoCombo] = useState([]);
-    // const [segundoValor, setSegundoValor] = useState("");
+    const getEstantes = async () => {
+    try {
+        const request = await api.get("/estantes", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        if (request.data.success) {
+            setEstantes(request.data.result);
+            return request.data.result;
+        } else {
+            alert(request.data.message);
+            return [];
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Ha surgido un error al recuperar los estantes, por favor intente más tarde");
+        return [];
+    }
+};
 
-    // useEffect(() => {
-    //     if (destino === "1") {
-    //         // Biblioteca: mostramos los estantes
-    //         getEstantes();
-    //         setOpcionesSegundoCombo(estantes); 
-    //     } else if (destino === "2") {
-    //         // Lista de deseos: mostramos prioridades
-    //         setOpcionesSegundoCombo([
-    //             { id: "alta", nombre: "Alta" },
-    //             { id: "media", nombre: "Media" },
-    //             { id: "baja", nombre: "Baja" }
-    //         ]);
-    //     } else {
-    //         setOpcionesSegundoCombo([]);
-    //     }
-    //     setSegundoValor(""); // reiniciamos el segundo combo cuando cambia el destino
-    // }, [destino, estantes]);
+
+    useEffect(() => {
+    const updateSegundoCombo = async () => {
+        if (destino === "1") {
+            // Biblioteca → mostrar estantes
+            const est = await getEstantes();
+            setOpcionesSegundoCombo(est);
+        } else if (destino === "2") {
+            // Lista de deseos → mostrar prioridades
+            setOpcionesSegundoCombo(prioridades);
+        } else {
+            setOpcionesSegundoCombo([]);
+        }
+        setSegundoValor(""); // reiniciamos el segundo combo
+    };
+
+    updateSegundoCombo();
+}, [destino]);
 
     return (
         <>
@@ -134,11 +144,10 @@ export const AgregarLibro = () => {
                 </Row>
 
                 <Row className="mb-4">
-                    {/* <Col>
+                    <Col>
                         <Form.Group className="mb-3" controlId="formDestino">
                             <Form.Label>Agregar a </Form.Label>
                             <Form.Select
-                                aria-label="Default select example"
                                 value={destino}
                                 onChange={(e) => setDestino(e.target.value)}
                             >
@@ -157,20 +166,19 @@ export const AgregarLibro = () => {
 
                             <Form.Select
                                 value={segundoValor}
-                                disabled={destino !=1 && destino != 2}
-                                onChange={(e) => setSegundoValor(e.target.value)}>
+                                disabled={destino != "1" && destino != "2"}
+                                onChange={(e) => setSegundoValor(e.target.value)}
+                            >
                                 <option>[Seleccione]</option>
 
-                                {opcionesSegundoCombo.map((opciones) => (
-                                    <option
-                                        key={opciones.id}
-                                        value={opciones.id_}
-                                    >{opciones.nombre}
+                                {opcionesSegundoCombo.map((opcion) => (
+                                    <option key={opcion.id} value={opcion.id}>
+                                        {opcion.nombre}
                                     </option>
                                 ))}
                             </Form.Select>
                         </Form.Group>
-                    </Col> */}
+                    </Col>
                 </Row>
 
                 <Row className="mb-3">
