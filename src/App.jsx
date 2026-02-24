@@ -42,7 +42,7 @@ export const App = () => {
                         <PrivateApp />
                     </ProtectedRoute>} />
 
-                     <Route path='*' element={<Error404 />} />
+                    <Route path='*' element={<Error404 />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

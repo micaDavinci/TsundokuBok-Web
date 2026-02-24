@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 export const Menu = ({ show, onClose }) => {
 
   const { token } = useAuth();
+  const { user } = useAuth()
+  const hasRole = (roles) => roles.includes(user?.role)
 
   useEffect(() => {
     if (token) {
@@ -40,30 +42,48 @@ export const Menu = ({ show, onClose }) => {
 
       <Offcanvas.Body className="p-0">
         <Nav className="flex-column p-2 gap-2">
-          <Nav.Link as={Link} to="/mi-biblioteca/biblioteca" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-book-half"> Biblioteca</i>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/mi-biblioteca/nuevo-libro" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-journal-plus"> Nuevo libro</i>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/mi-biblioteca/prestamos" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-calendar2-check"> Préstamos</i>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/mi-biblioteca/lista-de-deseos" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-list-ul"> Lista de deseos</i>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/mi-biblioteca/amigos" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-people-fill"> Mis amigos</i>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/mi-biblioteca/invitado" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-person-heart"> Invitado</i>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/mi-biblioteca/usuarios" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-person-lines-fill"> Usuarios</i>
-          </Nav.Link>
-          <Nav.Link as={Link} to="/mi-biblioteca/consultas" className="align-items-center color-rosaT link-nav">
-            <i className="bi bi-question-circle-fill"> Consultas</i>
-          </Nav.Link>
+          {["ADMIN", "USER"].includes(user?.role) && (
+            <>
+              <Nav.Link as={Link} to="/mi-biblioteca/biblioteca" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-book-half"> Biblioteca</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/nuevo-libro" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-journal-plus"> Nuevo libro</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/prestamos" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-calendar2-check"> Préstamos</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/lista-de-deseos" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-list-ul"> Lista de deseos</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/amigos" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-people-fill"> Mis amigos</i>
+              </Nav.Link>
+            </>
+          )}
+
+
+
+
+          {["ADMIN", "GUEST"].includes(user?.role) && (
+            <Nav.Link as={Link} to="/mi-biblioteca/invitado" className="align-items-center color-rosaT link-nav">
+              <i className="bi bi-person-heart"> Invitado</i>
+            </Nav.Link>
+          )}
+
+
+
+          {hasRole(["ADMIN"]) && (
+            <>
+              <Nav.Link as={Link} to="/mi-biblioteca/usuarios" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-person-lines-fill"> Usuarios</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/consultas" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-question-circle-fill"> Consultas</i>
+              </Nav.Link>
+            </>
+          )}
+
         </Nav>
       </Offcanvas.Body>
 

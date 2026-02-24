@@ -20,46 +20,136 @@ import { Amigos } from '../pages/Amigos/Amigos';
 import { Invitados } from '../pages/Amigos/Invitados';
 import { Consultas } from '../pages/Admin/Consultas';
 import { Usuarios } from '../pages/Admin/Usuarios';
+import ProtectedRoute from '../context/ProtectedRoute';
 
 export const PrivateApp = () => {
     const [showMenu, setShowMenu] = useState(false)
 
     return (
+        <div className='app-layout'>
+            <Menu show={showMenu} onClose={() => setShowMenu(false)} />
+            <main className="with-sidebar">
+                <Container fluid>
+                    <Routes>
+                        {/* Biblioteca */}
+                        <Route
+                            path='/biblioteca'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <Biblioteca />
+                                </ProtectedRoute>}
+                        />
+                        <Route
+                            path='/estante/:id'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <Estante />
+                                </ProtectedRoute>}
+                        />
 
- 
-            <div className='app-layout'>
-                <Menu show={showMenu} onClose={() => setShowMenu(false)} />
-                <main className="with-sidebar">
-                    <Container fluid>
-                        <Routes>
-                            {/* Biblioteca */}
-                            <Route path='/biblioteca' element={<Biblioteca />} />
-                            <Route path='/estante/:id' element={<Estante />} />
+                        {/* Reseña */}
+                        <Route
+                            path='/libro'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <LibroInfo />
+                                </ProtectedRoute>}
+                        />
 
-                            {/* Reseña */}
-                            <Route path='/libro' element={<LibroInfo />} />
-                            <Route path='/libro/:id' element={<LibroInfo />} />
-                            <Route path="/editar-libro/:id" element={<LibroEdit />} />
+                        <Route
+                            path='/libro/:id'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <LibroInfo />
+                                </ProtectedRoute>}
+                        />
 
-                            {/* Nuevo libro */}
-                            <Route path='/nuevo-libro' element={<NuevoLibro />} />
-                            <Route path='/agregar-libro' element={<AgregarLibro />} />
-                            <Route path='/buscar-libro' element={<BuscarLibro />} />
+                        <Route
+                            path="/editar-libro/:id"
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <LibroEdit />
+                                </ProtectedRoute>}
+                        />
 
-                            {/* Lista de deseos */}
-                            <Route path='/lista-de-deseos' element={<ListaDeDeseo />} />
-                            <Route path='/amigos' element={<Amigos />} />
-                            <Route path='/invitado' element={<Invitados />} />
+                        {/* Nuevo libro */}
+                        <Route
+                            path='/nuevo-libro'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <NuevoLibro />
+                                </ProtectedRoute>}
+                        />
 
-                            <Route path='/prestamos' element={<Prestamo />} />
+                        <Route
+                            path='/agregar-libro'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <AgregarLibro />
+                                </ProtectedRoute>}
+                        />
 
-                            {/* Consultas */}
-                            <Route path='/consultas' element={<Consultas />} /> 
-                            <Route path='/usuarios' element={<Usuarios />} /> 
-                        </Routes>
-                    </Container>
-                </main>
-            </div>
+                        <Route
+                            path='/buscar-libro'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <BuscarLibro />
+                                </ProtectedRoute>}
+                        />
+
+                        {/* Lista de deseos */}
+                        <Route
+                            path='/lista-de-deseos'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <ListaDeDeseo />
+                                </ProtectedRoute>}
+                        />
+
+                        <Route
+                            path='/amigos'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <Amigos />
+                                </ProtectedRoute>}
+                        />
+
+                        <Route
+                            path='/invitado'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "GUEST"]}>
+                                    <Invitados />
+                                </ProtectedRoute>}
+                        />
+
+                        <Route
+                            path='/prestamos'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN", "USER"]}>
+                                    <Prestamo />
+                                </ProtectedRoute>}
+                        />
+
+                        {/* Consultas */}
+                        <Route
+                            path='/consultas'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                                    <Consultas />
+                                </ProtectedRoute>}
+                        />
+
+                        <Route
+                            path='/usuarios'
+                            element={
+                                <ProtectedRoute allowedRoles={["ADMIN"]}>
+                                    <Usuarios />
+                                </ProtectedRoute>}
+                        />
+                    </Routes>
+                </Container>
+            </main>
+        </div>
     )
 }
 
