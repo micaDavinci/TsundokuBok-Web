@@ -51,7 +51,7 @@ export const LibroInfo = () => {
                         src={
                             LibroInfo.portada
                                 ? `${server}/uploads/portadas/${LibroInfo.portada}`
-                                : '/default-cover.jpg'
+                                : `${server}/uploads/portadas/default-cover.jpg`                            
                         }
                         alt={LibroInfo.titulo}
                         style={{ width: '150px', height: 'auto' }}

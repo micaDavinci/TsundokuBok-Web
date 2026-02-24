@@ -4,9 +4,10 @@ import { Link } from "react-router-dom"
 import { useAuth } from '../../context/AuthContext';
 import { api } from "../../api/axios";
 
-export const LibroList = ({libro, refreshEstante}) => {
-    const {id_libro, titulo, autor, estado} = libro;
+export const LibroList = ({ libro, refreshEstante }) => {
+    const { id_libro, titulo, autor, estado, portada } = libro;
     const { token } = useAuth();
+    const server = import.meta.env.VITE_API_URL;
 
     const [estantes, setEstantes] = useState([]);
     const [idLibro, setIdLibro] = useState("");
@@ -63,31 +64,31 @@ export const LibroList = ({libro, refreshEstante}) => {
         }
     }
 
-   const handleEliminar = async () => {
-    const confirmDelete = window.confirm(
-        "Esta acción es irreversible ¿Está seguro/a de que desea eliminar este libro?"
-    );
-
-    if (!confirmDelete) return;
-
-    try {
-        const request = await api.delete(
-            `/eliminar-libro/${id_libro}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            }
+    const handleEliminar = async () => {
+        const confirmDelete = window.confirm(
+            "Esta acción es irreversible ¿Está seguro/a de que desea eliminar este libro?"
         );
 
-        if (request.data.success) {
-            refreshEstante();
-        }
+        if (!confirmDelete) return;
 
-    } catch (error) {
-        console.error(error);
-    }
-};
+        try {
+            const request = await api.delete(
+                `/eliminar-libro/${id_libro}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (request.data.success) {
+                refreshEstante();
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const handleShow = (libroID) => {
         setIdLibro(libroID.id_libro);
@@ -156,7 +157,15 @@ export const LibroList = ({libro, refreshEstante}) => {
                     </Row>
                     <Row>
                         <Col>
-                            <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
+                            <Card.Img
+                                src={
+                                    portada
+                                        ? `${server}/uploads/portadas/${portada}`
+                                        : `${server}/uploads/portadas/default-cover.jpg`
+                                }
+                                alt={titulo}
+                                style={{ width: '150px', height: 'auto' }}
+                                className="img-fluid p-1 rounded-start" />
                         </Col>
                         <Col>
                             <Link to={`/mi-biblioteca/libro/${id_libro}`} className="link-offset-2 link-underline link-underline-opacity-0">

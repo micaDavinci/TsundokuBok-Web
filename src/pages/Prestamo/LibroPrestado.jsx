@@ -4,8 +4,9 @@ import { useAuth } from '../../context/AuthContext';
 import { Badge, Card, Col, Row, Dropdown, Modal, Form, Button } from "react-bootstrap"
 
 export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
-    const { id, titulo, autor, persona, fecha_prestamo, estado } = prestamo
+    const { id, titulo, autor, persona, fecha_prestamo, estado, portada } = prestamo
     const { token } = useAuth();
+    const server = import.meta.env.VITE_API_URL;
     const [show, setShow] = useState(false);
     const [personaNueva, setPersonaNueva] = useState("");
     const [fechaNueva, setFechaNueva] = useState("");
@@ -103,7 +104,14 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                     <Card.Body>
                         <Row>
                             <Col>
-                                <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
+                                <Card.Img src={
+                                    portada
+                                        ? `${server}/uploads/portadas/${portada}`
+                                        : `${server}/uploads/portadas/default-cover.jpg`
+                                }
+                                alt={titulo}
+                                style={{ width: '150px', height: 'auto' }}
+                                className="img-fluid p-1 rounded-start" />
                             </Col>
                             <Col>
                                 <div className="d-flex justify-content-end">
