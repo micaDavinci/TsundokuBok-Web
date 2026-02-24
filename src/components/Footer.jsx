@@ -14,14 +14,14 @@ export const Footer = () => {
                         </Link>
                     </Col>
 
-                    <Col md={6} lg={6}>
+                    {/* <Col md={6} lg={6}>
                         <h5>Ayuda</h5>
                         <ul className="list-unstyled">
                             <li>
                                 <Link className="link-offset-2 link-underline link-underline-opacity-0 color-verdeO" to="/contacto">Contacto</Link>
                             </li>
                         </ul>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
 

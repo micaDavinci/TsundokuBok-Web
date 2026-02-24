@@ -134,13 +134,13 @@ export const PrivateApp = () => {
                         />
 
                         {/* Consultas */}
-                        <Route
+                        {/* <Route
                             path='/consultas'
                             element={
                                 <ProtectedRoute allowedRoles={[admin]}>
                                     <Consultas />
                                 </ProtectedRoute>}
-                        />
+                        /> */}
 
                         <Route
                             path='/usuarios'

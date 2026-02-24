@@ -35,7 +35,7 @@ export const App = () => {
                     <Route path='/login' element={<Login />} />
                     <Route path='/login-invitado' element={<LoginInvitado />} />
                     <Route path='/' element={<Home />} />
-                    <Route path='/contacto' element={<Contacto />} />
+                    {/* <Route path='/contacto' element={<Contacto />} /> */}
                     <Route path='/registro' element={<Register />} />
 
                     <Route path="/mi-biblioteca/*" element={<ProtectedRoute>
