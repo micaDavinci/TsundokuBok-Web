@@ -20,6 +20,8 @@ export const LibroEdit = () => {
         paginas: "",
         genero: "",
         sinopsis: "",
+        inicio: "",
+        fin: "",
     });
 
     useEffect(() => {
@@ -48,6 +50,8 @@ export const LibroEdit = () => {
                     paginas: libro.paginas ?? "",
                     genero: libro.genero ?? "",
                     sinopsis: libro.sinopsis ?? "",
+                    fin: libro.fin ?? "",
+                    inicio: libro.inicio ?? ""
                 });
             } else {
                 alert(request.data.message);
@@ -133,12 +137,22 @@ export const LibroEdit = () => {
                                 </Form.Group>
                                 <Col>
                                     <FloatingLabel controlId="flotingFechaInicio" label="Fecha de inicio">
-                                        <Form.Control size="sm" type="text" placeholder="DD/MM/AAAA" />
+                                        <Form.Control
+                                            size="sm"
+                                            type="date"
+                                            value={formData.inicio}
+                                            onChange={(e) => setformData({ ...formData, inicio: e.target.value || null })}
+                                        />
                                     </FloatingLabel>
                                 </Col>
                                 <Col>
                                     <FloatingLabel controlId="flotingFechaFin" label="Fecha de fin">
-                                        <Form.Control size="sm" type="text" placeholder="DD/MM/AAAA" />
+                                        <Form.Control
+                                            size="sm"
+                                            type="date"
+                                            value={formData.fin}
+                                            onChange={(e) => setformData({ ...formData, fin: e.target.value || null })}
+                                        />
                                     </FloatingLabel>
                                 </Col>
                             </Row>
@@ -147,6 +161,7 @@ export const LibroEdit = () => {
                                 <Form.Group className="mb-3" controlId="formFormato">
                                     <Form.Label>Formato</Form.Label>
                                     <Form.Select aria-label="Default select example">
+                                        <option>[Seleccionar]</option>
                                         <option value="1">Físico</option>
                                         <option value="2">Ebook</option>
                                         <option value="3">Audio libro</option>

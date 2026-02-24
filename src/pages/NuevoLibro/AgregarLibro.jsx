@@ -73,28 +73,25 @@ export const AgregarLibro = () => {
     const handleNuevo = async (e) => {
         e.preventDefault();
 
-        
-
         const payload = {
-            
-        titulo,
-        autor,
-        edicion,
-        paginas,
-        idioma,
-        sinopsis,
-        genero,
-        portada,
-        id_ubicacion: destino === "1" ? segundoValor : "",
-        prioridad: destino === "2" ? segundoValor : null
-    };
+            titulo,
+            autor,
+            edicion,
+            paginas,
+            idioma,
+            sinopsis,
+            genero,
+            portada,
+            id_ubicacion: destino === "1" ? segundoValor : "",
+            prioridad: destino === "2" ? segundoValor : null
+        };
 
-    try {
-        const request = await api.post(`/nuevo-libro`, payload, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        try {
+            const request = await api.post(`/nuevo-libro`, payload, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
 
 
             if (request.data.success) {

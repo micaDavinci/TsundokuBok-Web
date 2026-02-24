@@ -117,7 +117,7 @@ export const Amigos = () => {
                 <tbody>
                     {invitadosList.length === 0 ? (
                         <tr>
-                            No se han registrado préstamos todavía.
+                            No se han registrado amigos/as todavía.
                         </tr>
                     ) : (
                         invitadosList.map((invitado) => (

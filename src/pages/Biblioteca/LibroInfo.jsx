@@ -67,8 +67,8 @@ export const LibroInfo = () => {
                     <Accordion.Body>
                         <Row className="mb-3">
                             <h4 className="color-verdeO">Fecha de lectura</h4>
-                            <Col><p className="ps-4 color-rosaT">Fecha de inicio: DD/MM/AAAA</p></Col>
-                            <Col><p className="color-rosaT">Fecha de Fin: DD/MM/AAAA</p></Col>
+                            <Col><p className="ps-4 color-rosaT">Fecha de inicio:  {LibroInfo.inicio ? new Date(LibroInfo.inicio).toLocaleDateString('es-AR') : '-'}</p></Col>
+                            <Col><p className="color-rosaT">Fecha de Fin:   {LibroInfo.fin ? new Date(LibroInfo.inicio).toLocaleDateString('es-AR') : '-'}</p></Col>
                         </Row>
                         <Row className="mb-3">
                             <h4 className="color-verdeO">Formato</h4>
