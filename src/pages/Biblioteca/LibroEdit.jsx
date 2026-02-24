@@ -7,7 +7,9 @@ import { api } from "../../api/axios";
 export const LibroEdit = () => {
     const { id } = useParams();
     const { token } = useAuth();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [portada, setPortada] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
 
     const [formData, setformData] = useState({
         titulo: "",
@@ -21,7 +23,7 @@ export const LibroEdit = () => {
         genero: "",
         sinopsis: "",
         inicio: "",
-        fin: "",
+        fin: ""
     });
 
     useEffect(() => {
@@ -51,7 +53,7 @@ export const LibroEdit = () => {
                     genero: libro.genero ?? "",
                     sinopsis: libro.sinopsis ?? "",
                     fin: libro.fin ?? "",
-                    inicio: libro.inicio ?? ""
+                    inicio: libro.inicio ?? "",
                 });
             } else {
                 alert(request.data.message);
@@ -64,9 +66,20 @@ export const LibroEdit = () => {
 
     const handleEditar = async () => {
         try {
-            const request = await api.put(`/editar-libro/${id}`, formData, {
+            const form = new FormData();
+
+            Object.entries(formData).forEach(([key, value]) => {
+                form.append(key, value);
+            });
+
+            if (portada) {
+                form.append('portada', portada);
+            }
+
+            const request = await api.put(`/editar-libro/${id}`, form, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
                 }
             });
             if (request.data.success) {
@@ -90,11 +103,22 @@ export const LibroEdit = () => {
         }));
     };
 
+    const handlePortadaChange = (e) => {
+        const file = e.target.files[0];
+        setPortada(file);
+        if (file) {
+            setPreviewUrl(URL.createObjectURL(file)); // previsualización
+        } else {
+            setPreviewUrl(null);
+        }
+    };
+
     return (
         <>
             <h1 className="mb-4">Editar libro</h1>
             <Form>
-                <Row>
+
+                <Row className="mb-4">
                     <Col sm={12} md={6} lg={6}>
                         <Form.Group className="mb-3" controlId="formTitulo">
                             <Form.Label>Título</Form.Label>
@@ -103,7 +127,7 @@ export const LibroEdit = () => {
                                 placeholder="Título"
                                 value={formData.titulo}
                                 name="titulo"
-                                onChange={handleChange} />
+                                onChange={handlePortadaChange} />
                         </Form.Group>
                     </Col>
                     <Col sm={12} md={6} lg={6}>
@@ -118,9 +142,13 @@ export const LibroEdit = () => {
                         </Form.Group>
                     </Col>
                     <Col sm={12} md={6} lg={6}>
-                        <Form.Group controlId="formFile" className="mb-3">
+                        <Form.Group controlId="formPortada">
                             <Form.Label>Portada</Form.Label>
-                            <Form.Control type="file" />
+                            <Form.Control
+                                type="file"
+                                accept="image/*"
+                                onChange={handlePortadaChange}
+                            />
                         </Form.Group>
                     </Col>
                 </Row>

@@ -7,6 +7,7 @@ import { api } from "../../api/axios";
 export const LibroInfo = () => {
     const { id } = useParams();
     const { token } = useAuth();
+    const server = import.meta.env.VITE_API_URL;
 
     const [LibroInfo, setLibroInfo] = useState([]);
 
@@ -46,7 +47,16 @@ export const LibroInfo = () => {
             {/* Información general */}
             <Row className="mb-4">
                 <Col sm={12} md={3} lg={3}>
-                    <img src="../img/img.jpg" className="img-fluid p-1 rounded" />
+                    <img
+                        src={
+                            LibroInfo.portada
+                                ? `${server}/uploads/portadas/${LibroInfo.portada}`
+                                : '/default-cover.jpg'
+                        }
+                        alt={LibroInfo.titulo}
+                        style={{ width: '150px', height: 'auto' }}
+                        className="img-fluid p-1 rounded" />
+
                 </Col>
 
                 <Col sm={12} md={9} lg={9}>

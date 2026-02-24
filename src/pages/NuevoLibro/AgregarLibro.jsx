@@ -17,7 +17,8 @@ export const AgregarLibro = () => {
     const [idioma, setIdioma] = useState("");
     const [sinopsis, setSinopsis] = useState("");
     const [genero, setGenero] = useState("");
-    const [portada, setPortada] = useState("");
+    const [portadaFile, setPortadaFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState(null);
     const [prioridad, setPriotidad] = useState("");
     const [destino, setDestino] = useState("");
 
@@ -81,7 +82,7 @@ export const AgregarLibro = () => {
             idioma,
             sinopsis,
             genero,
-            portada,
+            portada: portadaFile,
             id_ubicacion: destino === "1" ? segundoValor : "",
             prioridad: destino === "2" ? segundoValor : null
         };
@@ -89,7 +90,8 @@ export const AgregarLibro = () => {
         try {
             const request = await api.post(`/nuevo-libro`, payload, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data',
                 }
             });
 
@@ -107,6 +109,15 @@ export const AgregarLibro = () => {
     }
 
 
+    const handlePortadaChange = (e) => {
+        const file = e.target.files[0];
+        setPortadaFile(file);
+        if (file) {
+            setPreviewUrl(URL.createObjectURL(file)); // previsualización
+        } else {
+            setPreviewUrl(null);
+        }
+    };
 
     return (
         <>
@@ -115,14 +126,14 @@ export const AgregarLibro = () => {
             <Form onSubmit={handleNuevo}>
                 <Row className="mb-4">
                     <Col sm={6} md={3} lg={3}>
-                        <img src="../img/img.jpg" className="img-fluid p-1 rounded" />
-                        <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Control
-                                type="file"
-                                name="portada"
-                                value={portada}
-                                onChange={(e) => setPortada(e.target.value)} />
-                        </Form.Group>
+                        {previewUrl && (
+                            <div className="mt-2">
+                                <img src={previewUrl} alt="Portada" width="150" />
+                            </div>
+                        )}
+                        
+
+                        
                     </Col>
 
                     <Col sm={6} md={6} lg={6}>
@@ -145,6 +156,15 @@ export const AgregarLibro = () => {
                                 name="autor"
                                 value={autor}
                                 onChange={(e) => setAutor(e.target.value)} />
+                        </Form.Group>
+
+                        <Form.Group controlId="formPortada">
+                            <Form.Label>Portada</Form.Label>
+                            <Form.Control
+                                type="file"
+                                accept="image/*"
+                                onChange={handlePortadaChange}
+                            />
                         </Form.Group>
                     </Col>
                 </Row>
