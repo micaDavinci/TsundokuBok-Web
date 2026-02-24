@@ -23,34 +23,80 @@ export const AgregarLibro = () => {
 
     const [estantes, setEstantes] = useState([]);
     const [opcionesSegundoCombo, setOpcionesSegundoCombo] = useState([]);
-const [segundoValor, setSegundoValor] = useState("");
+    const [segundoValor, setSegundoValor] = useState("");
 
     const prioridades = [
-    { id: "alta", nombre: "Alta" },
-    { id: "media", nombre: "Media" },
-    { id: "baja", nombre: "Baja" }
-];
+        { id: "alta", nombre: "Alta" },
+        { id: "media", nombre: "Media" },
+        { id: "baja", nombre: "Baja" }
+    ];
 
+
+    useEffect(() => {
+        const updateSegundoCombo = async () => {
+            if (destino === "1") {
+                // Biblioteca → mostrar estantes
+                const est = await getEstantes();
+                setOpcionesSegundoCombo(est);
+            } else if (destino === "2") {
+                // Lista de deseos → mostrar prioridades
+                setOpcionesSegundoCombo(prioridades);
+            } else {
+                setOpcionesSegundoCombo([]);
+            }
+            setSegundoValor(""); // reiniciamos el segundo combo
+        };
+
+        updateSegundoCombo();
+    }, [destino]);
+
+
+    const getEstantes = async () => {
+        try {
+            const request = await api.get("/estantes", {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (request.data.success) {
+                setEstantes(request.data.result);
+                return request.data.result;
+            } else {
+                alert(request.data.message);
+                return [];
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Ha surgido un error al recuperar los estantes, por favor intente más tarde");
+            return [];
+        }
+    };
 
     const handleNuevo = async (e) => {
         e.preventDefault();
-        try {
-            const request = await api.post(`/nuevo-libro`, {
-                id_ubicacion,
-                titulo,
-                autor,
-                edicion,
-                paginas,
-                idioma,
-                sinopsis,
-                genero,
-                portada,
-                prioridad
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+
+        
+
+        const payload = {
+            
+        titulo,
+        autor,
+        edicion,
+        paginas,
+        idioma,
+        sinopsis,
+        genero,
+        portada,
+        id_ubicacion: destino === "1" ? segundoValor : "",
+        prioridad: destino === "2" ? segundoValor : null
+    };
+
+    try {
+        const request = await api.post(`/nuevo-libro`, payload, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+
             if (request.data.success) {
                 alert("Libro agregado correctamente");
                 navigate(`/mi-biblioteca/nuevo-libro`);
@@ -64,43 +110,6 @@ const [segundoValor, setSegundoValor] = useState("");
     }
 
 
-    const getEstantes = async () => {
-    try {
-        const request = await api.get("/estantes", {
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        if (request.data.success) {
-            setEstantes(request.data.result);
-            return request.data.result;
-        } else {
-            alert(request.data.message);
-            return [];
-        }
-    } catch (error) {
-        console.error(error);
-        alert("Ha surgido un error al recuperar los estantes, por favor intente más tarde");
-        return [];
-    }
-};
-
-
-    useEffect(() => {
-    const updateSegundoCombo = async () => {
-        if (destino === "1") {
-            // Biblioteca → mostrar estantes
-            const est = await getEstantes();
-            setOpcionesSegundoCombo(est);
-        } else if (destino === "2") {
-            // Lista de deseos → mostrar prioridades
-            setOpcionesSegundoCombo(prioridades);
-        } else {
-            setOpcionesSegundoCombo([]);
-        }
-        setSegundoValor(""); // reiniciamos el segundo combo
-    };
-
-    updateSegundoCombo();
-}, [destino]);
 
     return (
         <>
@@ -161,7 +170,7 @@ const [segundoValor, setSegundoValor] = useState("");
                     <Col>
                         <Form.Group className="mb-3" controlId="formEstante">
                             <Form.Label>
-                                {destino === "2" ? "Prioridad" : "Estante"}
+                                {destino === "2" ? "prioridad" : "ubicacion"}
                             </Form.Label>
 
                             <Form.Select
@@ -172,7 +181,10 @@ const [segundoValor, setSegundoValor] = useState("");
                                 <option>[Seleccione]</option>
 
                                 {opcionesSegundoCombo.map((opcion) => (
-                                    <option key={opcion.id} value={opcion.id}>
+                                    <option
+                                        key={opcion.id_estante ?? opcion.id} // si es prioridad no tendrá id_estante
+                                        value={opcion.id_estante ?? opcion.id}
+                                    >
                                         {opcion.nombre}
                                     </option>
                                 ))}
