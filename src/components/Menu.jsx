@@ -10,8 +10,8 @@ export const Menu = ({ show, onClose }) => {
   const { user } = useAuth()
   const hasRole = (roles) => roles.includes(user?.role)
   let guest = "GUEST";
-    let admin = "ADMIN";
-    let lector = "LECTOR";
+  let admin = "ADMIN";
+  let lector = "LECTOR";
 
   useEffect(() => {
     if (token) {

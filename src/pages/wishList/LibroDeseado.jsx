@@ -8,7 +8,10 @@ export const LibroDeseado = ({ wishListId }) => {
     const [activeModal, setActiveModal] = useState(null);
     const [selectedLibro, setSelectedLibro] = useState(null);
 
-    const { token } = useAuth();
+    const { user, token } = useAuth();
+    let admin = "ADMIN";
+  let lector = "LECTOR";
+
     const [librosList, setLibrosList] = useState([]);
     const [estanteDestino, setEstanteDestino] = useState("");
     const [nuevaPrioridad, setNuevaPrioridad] = useState("");
@@ -166,16 +169,20 @@ export const LibroDeseado = ({ wishListId }) => {
                                             <Card.Img src="../img/img.jpg" className="img-fluid p-1 rounded-start" />
                                         </Col>
                                         <Col>
-                                            <div className="d-flex justify-content-end">
-                                                <Dropdown>
-                                                    <Dropdown.Toggle variant="secondary" size="sm" />
-                                                    <Dropdown.Menu>
-                                                        <Dropdown.Item onClick={() => handleShowPriority(libro)}>Editar prioridad</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => handleShowMove(libro)} >Mover a mi biblioteca</Dropdown.Item>
-                                                        <Dropdown.Item onClick={() => handleEliminar(libro)}>Eliminar</Dropdown.Item>
-                                                    </Dropdown.Menu>
-                                                </Dropdown>
-                                            </div>
+
+                                            {[admin, lector].includes(user?.role) && (
+                                                <div className="d-flex justify-content-end">
+                                                    <Dropdown>
+                                                        <Dropdown.Toggle variant="secondary" size="sm" />
+                                                        <Dropdown.Menu>
+                                                            <Dropdown.Item onClick={() => handleShowPriority(libro)}>Editar prioridad</Dropdown.Item>
+                                                            <Dropdown.Item onClick={() => handleShowMove(libro)} >Mover a mi biblioteca</Dropdown.Item>
+                                                            <Dropdown.Item onClick={() => handleEliminar(libro)}>Eliminar</Dropdown.Item>
+                                                        </Dropdown.Menu>
+                                                    </Dropdown>
+                                                </div>
+                                            )}
+
 
                                             <Card.Title className="color-rosaT">{libro.titulo}</Card.Title>
                                             <Card.Text className="color-rosaO">{libro.autor}</Card.Text>
