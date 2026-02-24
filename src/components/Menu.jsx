@@ -1,45 +1,95 @@
-export const Menu = () => {
-  return(
-    <>
-      <div
-        className="offcanvas-md offcanvas-start"
-        tabIndex="-1"
-        id="sidebarMenu"
-        aria-labelledby="sidebarMenuLabel"
-        style={{ width: '240px' }}
-      >
-        <div className="offcanvas-header d-md-none">
-          <h5 className="offcanvas-title" id="sidebarMenuLabel color-rosaO">Menú</h5>
-        </div>
-        <div className="offcanvas-body p-0">
-          <ul className="nav flex-column nav-pills p-2 gap-2">
-            <li className="nav-item">
-              <a href="" className="nav-link d-flex align-items-center gap-2 color-rosaT">
-                <i className="bi bi-house-door">i</i>
-                <span className="d-md-inline">Biblioteca</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link d-flex align-items-center gap-2 color-rosaT">
-                <i className="bi bi-calendar">i</i>
-                <span className="d-md-inline">Lista de deseos</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link d-flex align-items-center gap-2 color-rosaT">
-                <i className="bi bi-folder">i</i>
-                <span className="d-md-inline">Nuevo libro</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link d-flex align-items-center gap-2 color-rosaT">
-                <i className="bi bi-folder">i</i>
-                <span className="d-md-inline">Préstamos</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </>
+import { Offcanvas, Nav } from "react-bootstrap"
+import { Link } from "react-router-dom"
+import { useAuth } from '../context/AuthContext';
+import { api } from "../api/axios";
+import { useEffect } from 'react';
+
+export const Menu = ({ show, onClose }) => {
+
+  const { token } = useAuth();
+  const { user } = useAuth()
+  const hasRole = (roles) => roles.includes(user?.role)
+  let guest = "GUEST";
+  let admin = "ADMIN";
+  let lector = "LECTOR";
+
+  useEffect(() => {
+    if (token) {
+      getWelcome();
+    }
+  }, []);
+
+  const getWelcome = async () => {
+    try {
+      const request = await api.get(`/welcome`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+    } catch (error) {
+      alert("Ha surgido un error, por favor intente más tardeee");
+    }
+  }
+
+  return (
+    <Offcanvas
+      show={show}
+      onHide={onClose}
+      responsive="md"
+      placement="start"
+      style={{ width: 240 }}
+    >
+      <Offcanvas.Header closeButton className="d-md-none">
+        <Offcanvas.Title className="color-rosaO">Menú</Offcanvas.Title>
+      </Offcanvas.Header>
+
+      <Offcanvas.Body className="p-0">
+        <Nav className="flex-column p-2 gap-2">
+          {[admin, lector].includes(user?.role) && (
+            <>
+              <Nav.Link as={Link} to="/mi-biblioteca/biblioteca" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-book-half"> Biblioteca</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/nuevo-libro" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-journal-plus"> Nuevo libro</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/prestamos" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-calendar2-check"> Préstamos</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/lista-de-deseos" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-list-ul"> Lista de deseos</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/amigos" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-people-fill"> Mis amigos</i>
+              </Nav.Link>
+            </>
+          )}
+
+
+
+
+          {[admin, guest].includes(user?.role) && (
+            <Nav.Link as={Link} to="/mi-biblioteca/invitado" className="align-items-center color-rosaT link-nav">
+              <i className="bi bi-person-heart"> Invitado</i>
+            </Nav.Link>
+          )}
+
+
+
+          {hasRole([admin]) && (
+            <>
+              <Nav.Link as={Link} to="/mi-biblioteca/usuarios" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-person-lines-fill"> Usuarios</i>
+              </Nav.Link>
+              <Nav.Link as={Link} to="/mi-biblioteca/consultas" className="align-items-center color-rosaT link-nav">
+                <i className="bi bi-question-circle-fill"> Consultas</i>
+              </Nav.Link>
+            </>
+          )}
+
+        </Nav>
+      </Offcanvas.Body>
+
+    </Offcanvas>
   )
 }

@@ -1,0 +1,122 @@
+:root {
+  --green-dark: #5a7362;
+  --green-medium: #6a7666;
+  --rose: #c69d91;
+  --cream: #e4dac9;
+  --kindle-bg: #2a2a2a;
+  --kindle-screen: #4a4a4a;
+  --kindle-text: #e4e4e4;
+}
+
+.login-wrapper {
+  min-height: 100vh;
+  background-color: var(--darker);
+  display: flex;
+margin-top: 30px;
+  justify-content: center;
+}
+
+.login-container {
+  max-width: 550px;
+}
+
+.kindle {
+  background-color: var(--kindle-bg);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.kindle-screen {
+  background-color: var(--kindle-screen);
+  border-radius: 6px;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.kindle-button {
+  width: 40px;
+  height: 4px;
+  background-color: #111;
+  border-radius: 2px;
+}
+
+.e-ink-texture {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.login-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.tsundoku {
+  color: var(--cream);
+}
+
+.bok {
+  color: var(--green-dark);
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.login-form {
+  max-width: 80%;
+}
+
+.login-form label {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.login-form input {
+
+  border: 1px solid var(--green-medium);
+  color: var(--kindle-text);
+}
+
+.login-form input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 2px rgba(198, 157, 145, 0.2);
+}
+
+.login-form button {
+  background-color: var(--green-dark);
+  border: none;
+  letter-spacing: 1px;
+}
+
+.login-form button:hover {
+  background-color: var(--green-medium);
+}
+
+.link-register {
+  color: var(--rose);
+  text-decoration: none;
+}
+
+.link-register:hover {
+  text-decoration: underline;
+}
+
+.battery-indicator {
+  width: 20px;
+  height: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  position: relative;
+}
+
+.battery-indicator::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background-color: var(--green-dark);
+}

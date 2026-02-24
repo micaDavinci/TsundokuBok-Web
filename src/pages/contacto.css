@@ -1,0 +1,44 @@
+.contact-section {
+    padding: 4rem 1rem;
+}
+
+.contact-title {
+    color: #E4DAC9; /* rosa principal */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.contact-subtitle {
+    color: #C69D91;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.contact-card .form-label {
+    font-size: 0.85rem;
+    color: #C69D91;
+}
+
+.contact-card .form-control {
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 0.6rem 0.75rem;
+}
+
+.contact-card .form-control:focus {
+    border-color: #C69D91;
+    box-shadow: 0 0 0 0.2rem rgba(180, 90, 122, 0.2);
+}
+
+.contact-button {
+    width: 100%;
+    border-radius: 14px;
+    background-color: #6A7666;
+    border: none;
+    padding: 0.6rem;
+    font-weight: 500;
+}
+
+.contact-button:hover {
+    background-color: #5A7362;
+}
