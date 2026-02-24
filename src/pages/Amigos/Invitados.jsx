@@ -62,12 +62,20 @@ export const Invitados = () => {
 
     return (
         <>
-            <h1>{lector.biblioteca}</h1>
+            {!lector ? (
+                <h1>Lista de deseos para invitados</h1>
+            ) : (
+                <>
+                    <h1>{lector.biblioteca}</h1>
 
-            <h2 className="color-verdeB">Lista de deseos de {lector.lector}</h2>
+                    <h2 className="color-verdeB">Lista de deseos de {lector.lector}</h2>
+                </>
+
+            )}
+
 
             <Row xs={1} md={2} className="g-4 mt-4">
-                 {!wishListId ? (
+                {!wishListId ? (
                     <p>No hay libros guardados en la lista de deseos todavía.</p>
                 ) : (
                     <LibroDeseado wishListId={wishListId} />

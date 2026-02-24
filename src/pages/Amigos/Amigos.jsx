@@ -117,7 +117,7 @@ export const Amigos = () => {
                 <tbody>
                     {invitadosList.length === 0 ? (
                         <tr>
-                            <td>No se han registrado préstamos todavía.</td>
+                            No se han registrado préstamos todavía.
                         </tr>
                     ) : (
                         invitadosList.map((invitado) => (
