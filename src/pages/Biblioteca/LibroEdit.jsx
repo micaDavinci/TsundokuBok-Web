@@ -40,7 +40,7 @@ export const LibroEdit = () => {
                 }
             });
             if (request.data.success) {
-                const libro = request.data.result[0]
+                const libro = request.data.result
                 setformData({
                     titulo: libro.titulo ?? "",
                     autor: libro.autor ?? "",

@@ -25,7 +25,7 @@ export const LibroInfo = () => {
                 }
             });
             if (request.data.success) {
-                setLibroInfo(request.data.result[0]);
+                setLibroInfo(request.data.result);
             } else {
                 alert(request.data.message);
             }
