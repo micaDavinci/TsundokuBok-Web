@@ -54,33 +54,40 @@ export const AgregarLibro = () => {
     }, [destino]);
 
     useEffect(() => {
-    const cargarLibroDesdeGoogle = async () => {
-        try {
-            const res = await api.get(`/libro-buscado/${id}`);
-            const data = res.data;
-            const info = data.volumeInfo;
+        const cargarLibroDesdeGoogle = async () => {
+            try {
+                const res = await api.get(`/libro-buscado/${id}`);
+                const data = res.data;
+                const info = data.volumeInfo;
 
-            seTtitulo(info.title || "");
-            setAutor(info.authors?.join(", ") || "");
-            setPaginas(info.pageCount || "");
-            setIdioma(info.language || "");
-            setSinopsis(info.description || "");
-            setGenero(info.categories?.join(", ") || "");
+                const portada = info.imageLinks?.thumbnail || "";                
+                const fecha = info.publishedDate || "";
+                const anio = fecha.substring(0, 4);
 
-            // Imagen (solo preview, no archivo real)
-            if (info.imageLinks?.thumbnail) {
-                setPreviewUrl(info.imageLinks.thumbnail);
+                seTtitulo(info.title || "");
+                setAutor(info.authors?.join(", ") || "");
+                setPaginas(info.pageCount || "");
+                setIdioma(info.language || "");
+                setSinopsis(limpiarHTML(info.description || ""));
+                setGenero(info.categories?.join(", ") || "");
+                setEdicion(anio);
+                setPortadaFile(portada);
+                // setEdicion(info.publishedDate || "");
+
+                // Imagen (solo preview, no archivo real)
+                if (info.imageLinks?.thumbnail) {
+                    setPreviewUrl(info.imageLinks.thumbnail);
+                }
+
+            } catch (error) {
+                console.error("Error cargando libro:", error);
             }
+        };
 
-        } catch (error) {
-            console.error("Error cargando libro:", error);
+        if (id) {
+            cargarLibroDesdeGoogle();
         }
-    };
-
-    if (id) {
-        cargarLibroDesdeGoogle();
-    }
-}, [id]);
+    }, [id]);
 
     const getEstantes = async () => {
         try {
@@ -149,6 +156,12 @@ export const AgregarLibro = () => {
         }
     };
 
+    const limpiarHTML = (html) => {
+        const temp = document.createElement("div");
+        temp.innerHTML = html;
+        return temp.textContent || temp.innerText || "";
+    };
+
     return (
         <>
             <h1 className='mb-4'>Agregar libro</h1>
@@ -161,9 +174,9 @@ export const AgregarLibro = () => {
                                 <img src={previewUrl} alt="Portada" width="150" />
                             </div>
                         )}
-                        
 
-                        
+
+
                     </Col>
 
                     <Col sm={6} md={6} lg={6}>
