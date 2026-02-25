@@ -10,8 +10,8 @@ export const LibroDeseado = ({ wishListId }) => {
 
     const { user, token } = useAuth();
     let admin = "ADMIN";
-  let lector = "LECTOR";
-  const server = import.meta.env.VITE_API_URL;
+    let lector = "LECTOR";
+    const server = import.meta.env.VITE_API_URL;
 
     const [librosList, setLibrosList] = useState([]);
     const [estanteDestino, setEstanteDestino] = useState("");
@@ -167,15 +167,15 @@ export const LibroDeseado = ({ wishListId }) => {
                                 <Card.Body>
                                     <Row>
                                         <Col>
-                                            <Card.Img 
-                                            src={
-                                    libro.portada
-                                        ? `${server}/uploads/portadas/${libro.portada}`
-                                        : `${server}/uploads/portadas/default-cover.jpg`
-                                }
-                                alt={libro.titulo}
-                                style={{ width: '150px', height: 'auto' }}
-                                className="img-fluid p-1 rounded-start"
+                                            <Card.Img
+                                                src={
+                                                    libro.portada
+                                                        ? `${server}/uploads/portadas/${libro.portada}`
+                                                        : `${server}/uploads/portadas/default-cover.jpg`
+                                                }
+                                                alt={libro.titulo}
+                                                style={{ width: '150px', height: 'auto' }}
+                                                className="img-fluid p-1 rounded-start"
                                             />
                                         </Col>
                                         <Col>
