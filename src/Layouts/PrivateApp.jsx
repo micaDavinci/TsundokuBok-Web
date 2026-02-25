@@ -93,6 +93,14 @@ export const PrivateApp = () => {
                         />
 
                         <Route
+                            path='/agregar-libro/:id'
+                            element={
+                                <ProtectedRoute allowedRoles={[admin, lector]}>
+                                    <AgregarLibro />
+                                </ProtectedRoute>}
+                        />
+
+                        <Route
                             path='/buscar-libro'
                             element={
                                 <ProtectedRoute allowedRoles={[admin, lector]}>

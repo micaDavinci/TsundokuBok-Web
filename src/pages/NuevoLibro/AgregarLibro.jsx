@@ -2,11 +2,13 @@ import { Button, Col, Form, Row } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useParams } from "react-router-dom";
 import { api } from "../../api/axios";
 
 export const AgregarLibro = () => {
 
     const { token } = useAuth();
+    const { id } = useParams();
     const [id_ubicacion, setIdUbicacion] = useState("");
     const navigate = useNavigate()
 
@@ -51,6 +53,34 @@ export const AgregarLibro = () => {
         updateSegundoCombo();
     }, [destino]);
 
+    useEffect(() => {
+    const cargarLibroDesdeGoogle = async () => {
+        try {
+            const res = await api.get(`/libro-buscado/${id}`);
+            const data = res.data;
+            const info = data.volumeInfo;
+
+            seTtitulo(info.title || "");
+            setAutor(info.authors?.join(", ") || "");
+            setPaginas(info.pageCount || "");
+            setIdioma(info.language || "");
+            setSinopsis(info.description || "");
+            setGenero(info.categories?.join(", ") || "");
+
+            // Imagen (solo preview, no archivo real)
+            if (info.imageLinks?.thumbnail) {
+                setPreviewUrl(info.imageLinks.thumbnail);
+            }
+
+        } catch (error) {
+            console.error("Error cargando libro:", error);
+        }
+    };
+
+    if (id) {
+        cargarLibroDesdeGoogle();
+    }
+}, [id]);
 
     const getEstantes = async () => {
         try {

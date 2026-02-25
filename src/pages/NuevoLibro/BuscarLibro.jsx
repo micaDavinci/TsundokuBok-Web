@@ -28,18 +28,18 @@ export const BuscarLibro = () => {
                 <input
                     type="text"
                     placeholder="Buscar un libro"
+                    className="me-2 rounded"
                     value={query}
                     onChange={e => setQuery(e.target.value)}
-                    style={{ padding: '0.5rem', width: '300px', marginRight: '1rem' }}
                 />
                 <Button variant="outline-secondary" onClick={buscarLibro}>
-                    <i className="bi bi-search">Buscar</i>
+                    <i className="bi bi-search"> Buscar</i>
                 </Button>
             </Row>
 
             <Row xs={3} md={4} className="g-3 mt-1">
                 {books.map(book => (
-                    <Resultado key={book.id} book={book.volumeInfo} />
+                    <Resultado key={book.id} book={book} />
                 ))}
             </Row>
         </>
