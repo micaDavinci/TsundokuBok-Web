@@ -171,7 +171,9 @@ export const LibroDeseado = ({ wishListId }) => {
                                                 src={
                                                     libro.portada
                                                         ? `${server}/uploads/portadas/${libro.portada}`
-                                                        : `${server}/uploads/portadas/default-cover.jpg`
+                                                        : libro.portadaGoogle
+                                                            ? libro.portadaGoogle
+                                                            : `${server}/uploads/portadas/default-cover.jpg`
                                                 }
                                                 alt={libro.titulo}
                                                 style={{ width: '150px', height: 'auto' }}

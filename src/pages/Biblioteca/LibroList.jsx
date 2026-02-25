@@ -159,9 +159,11 @@ export const LibroList = ({ libro, refreshEstante }) => {
                         <Col>
                             <Card.Img
                                 src={
-                                    portada
-                                        ? `${server}/uploads/portadas/${portada}`
-                                        : `${server}/uploads/portadas/default-cover.jpg`
+                                    libro.portada
+                                        ? `${server}/uploads/portadas/${libro.portada}`
+                                        : libro.portadaGoogle
+                                            ? libro.portadaGoogle
+                                            : `${server}/uploads/portadas/default-cover.jpg`
                                 }
                                 alt={titulo}
                                 style={{ width: '150px', height: 'auto' }}

@@ -20,6 +20,7 @@ export const AgregarLibro = () => {
     const [sinopsis, setSinopsis] = useState("");
     const [genero, setGenero] = useState("");
     const [portadaFile, setPortadaFile] = useState(null);
+    const [portadaGoogle, setPortadaGoogle] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [prioridad, setPriotidad] = useState("");
     const [destino, setDestino] = useState("");
@@ -59,8 +60,6 @@ export const AgregarLibro = () => {
                 const res = await api.get(`/libro-buscado/${id}`);
                 const data = res.data;
                 const info = data.volumeInfo;
-
-                const portada = info.imageLinks?.thumbnail || "";                
                 const fecha = info.publishedDate || "";
                 const anio = fecha.substring(0, 4);
 
@@ -71,7 +70,7 @@ export const AgregarLibro = () => {
                 setSinopsis(limpiarHTML(info.description || ""));
                 setGenero(info.categories?.join(", ") || "");
                 setEdicion(anio);
-                setPortadaFile(portada);
+                setPortadaGoogle(info.imageLinks?.thumbnail || "");
                 // setEdicion(info.publishedDate || "");
 
                 // Imagen (solo preview, no archivo real)
@@ -120,6 +119,7 @@ export const AgregarLibro = () => {
             sinopsis,
             genero,
             portada: portadaFile,
+            portadaGoogle,
             id_ubicacion: destino === "1" ? segundoValor : "",
             prioridad: destino === "2" ? segundoValor : null
         };
