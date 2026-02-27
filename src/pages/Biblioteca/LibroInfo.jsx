@@ -25,7 +25,7 @@ export const LibroInfo = () => {
                 }
             });
             if (request.data.success) {
-                setLibroInfo(request.data.result[0]);
+                setLibroInfo(request.data.result);
             } else {
                 alert(request.data.message);
             }
@@ -48,10 +48,13 @@ export const LibroInfo = () => {
             <Row className="mb-4">
                 <Col sm={12} md={3} lg={3}>
                     <img
+
                         src={
                             LibroInfo.portada
                                 ? `${server}/uploads/portadas/${LibroInfo.portada}`
-                                : `${server}/uploads/portadas/default-cover.jpg`                            
+                                : LibroInfo.portadaGoogle
+                                    ? LibroInfo.portadaGoogle
+                                    : `${server}/uploads/portadas/default-cover.jpg`
                         }
                         alt={LibroInfo.titulo}
                         style={{ width: '150px', height: 'auto' }}

@@ -11,7 +11,6 @@ import { Footer } from './components/Footer'
 
 // Páginas públicas
 import { Home } from './pages/Home'
-import { Contacto } from './pages/Contacto'
 import { Login } from './pages/Auth/Login'
 import { Register } from './pages/Auth/Register'
 
@@ -35,7 +34,6 @@ export const App = () => {
                     <Route path='/login' element={<Login />} />
                     <Route path='/login-invitado' element={<LoginInvitado />} />
                     <Route path='/' element={<Home />} />
-                    {/* <Route path='/contacto' element={<Contacto />} /> */}
                     <Route path='/registro' element={<Register />} />
 
                     <Route path="/mi-biblioteca/*" element={<ProtectedRoute>

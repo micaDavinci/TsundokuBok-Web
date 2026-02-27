@@ -81,9 +81,6 @@ export const Menu = ({ show, onClose }) => {
               <Nav.Link as={Link} to="/mi-biblioteca/usuarios" className="align-items-center color-rosaT link-nav">
                 <i className="bi bi-person-lines-fill"> Usuarios</i>
               </Nav.Link>
-              <Nav.Link as={Link} to="/mi-biblioteca/consultas" className="align-items-center color-rosaT link-nav">
-                <i className="bi bi-question-circle-fill"> Consultas</i>
-              </Nav.Link>
             </>
           )}
 

@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { Badge, Card, Col, Row, Dropdown, Modal, Form, Button } from "react-bootstrap"
 
 export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
-    const { id, titulo, autor, persona, fecha_prestamo, estado, portada } = prestamo
+    const { id, titulo, autor, persona, fecha_prestamo, estado, portada, portadaGoogle } = prestamo
     const { token } = useAuth();
     const server = import.meta.env.VITE_API_URL;
     const [show, setShow] = useState(false);
@@ -15,8 +15,8 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
         try {
             const request = await api.put(`/editar-prestamo/${prestamoID}`,
                 {
-                    id, 
-                    persona: personaNueva, 
+                    id,
+                    persona: personaNueva,
                     fecha_prestamo: fechaNueva
                 }, {
                 headers: {
@@ -104,14 +104,17 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                     <Card.Body>
                         <Row>
                             <Col>
-                                <Card.Img src={
-                                    portada
-                                        ? `${server}/uploads/portadas/${portada}`
-                                        : `${server}/uploads/portadas/default-cover.jpg`
-                                }
-                                alt={titulo}
-                                style={{ width: '150px', height: 'auto' }}
-                                className="img-fluid p-1 rounded-start" />
+                                <Card.Img
+                                    src={
+                                        portada
+                                            ? `${server}/uploads/portadas/${portada}`
+                                            : portadaGoogle
+                                                ? portadaGoogle
+                                                : `${server}/uploads/portadas/default-cover.jpg`
+                                    }
+                                    alt={titulo}
+                                    style={{ width: '150px', height: 'auto' }}
+                                    className="img-fluid p-1 rounded-start" />
                             </Col>
                             <Col>
                                 <div className="d-flex justify-content-end">
@@ -169,7 +172,7 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                                 type="date"
                                 name="fecha_prestamo"
                                 value={fechaNueva}
-                                onChange={(e) => setFechaNueva(e.target.value)} 
+                                onChange={(e) => setFechaNueva(e.target.value)}
                             />
                         </Form.Group>
                     </Form>

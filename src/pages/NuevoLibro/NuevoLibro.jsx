@@ -7,7 +7,7 @@ export const NuevoLibro = () => {
             <h1 className='mb-4'>Nuevo libro</h1>
             <Row>
                 <Col sm={12} md={4} lg={4} className="d-grid gap-2 my-4">
-                    <Button as={Link} disabled to="/mi-biblioteca/buscar-libro" variant="secondary" className="py-3"><i className="bi bi-search"></i> Buscar</Button>
+                    <Button as={Link} to="/mi-biblioteca/buscar-libro" className="button-rosa py-3"><i className="bi bi-search"></i> Buscar</Button>
                 </Col>
                 <Col sm={12} md={4} lg={4} className="d-grid gap-2 my-4">
                     <Button as={Link} to="/mi-biblioteca/agregar-libro" className="button-rosa py-3"><i className="bi bi-vector-pen"></i> Agregar manualmente</Button>

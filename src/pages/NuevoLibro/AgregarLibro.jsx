@@ -2,11 +2,13 @@ import { Button, Col, Form, Row } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useParams } from "react-router-dom";
 import { api } from "../../api/axios";
 
 export const AgregarLibro = () => {
 
     const { token } = useAuth();
+    const { id } = useParams();
     const [id_ubicacion, setIdUbicacion] = useState("");
     const navigate = useNavigate()
 
@@ -18,6 +20,7 @@ export const AgregarLibro = () => {
     const [sinopsis, setSinopsis] = useState("");
     const [genero, setGenero] = useState("");
     const [portadaFile, setPortadaFile] = useState(null);
+    const [portadaGoogle, setPortadaGoogle] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [prioridad, setPriotidad] = useState("");
     const [destino, setDestino] = useState("");
@@ -51,6 +54,39 @@ export const AgregarLibro = () => {
         updateSegundoCombo();
     }, [destino]);
 
+    useEffect(() => {
+        const cargarLibroDesdeGoogle = async () => {
+            try {
+                const res = await api.get(`/libro-buscado/${id}`);
+                const data = res.data;
+                const info = data.volumeInfo;
+                const fecha = info.publishedDate || "";
+                const anio = fecha.substring(0, 4);
+
+                seTtitulo(info.title || "");
+                setAutor(info.authors?.join(", ") || "");
+                setPaginas(info.pageCount || "");
+                setIdioma(info.language || "");
+                setSinopsis(limpiarHTML(info.description || ""));
+                setGenero(info.categories?.join(", ") || "");
+                setEdicion(anio);
+                setPortadaGoogle(info.imageLinks?.thumbnail || "");
+                // setEdicion(info.publishedDate || "");
+
+                // Imagen (solo preview, no archivo real)
+                if (info.imageLinks?.thumbnail) {
+                    setPreviewUrl(info.imageLinks.thumbnail);
+                }
+
+            } catch (error) {
+                console.error("Error cargando libro:", error);
+            }
+        };
+
+        if (id) {
+            cargarLibroDesdeGoogle();
+        }
+    }, [id]);
 
     const getEstantes = async () => {
         try {
@@ -83,6 +119,7 @@ export const AgregarLibro = () => {
             sinopsis,
             genero,
             portada: portadaFile,
+            portadaGoogle,
             id_ubicacion: destino === "1" ? segundoValor : "",
             prioridad: destino === "2" ? segundoValor : null
         };
@@ -119,6 +156,12 @@ export const AgregarLibro = () => {
         }
     };
 
+    const limpiarHTML = (html) => {
+        const temp = document.createElement("div");
+        temp.innerHTML = html;
+        return temp.textContent || temp.innerText || "";
+    };
+
     return (
         <>
             <h1 className='mb-4'>Agregar libro</h1>
@@ -131,9 +174,9 @@ export const AgregarLibro = () => {
                                 <img src={previewUrl} alt="Portada" width="150" />
                             </div>
                         )}
-                        
 
-                        
+
+
                     </Col>
 
                     <Col sm={6} md={6} lg={6}>
