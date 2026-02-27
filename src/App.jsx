@@ -16,9 +16,9 @@ import { Register } from './pages/Auth/Register'
 
 //Menú - Rutas privadas
 import ProtectedRoute from './context/ProtectedRoute'
-import { PrivateApp } from './layouts/PrivateApp'
 import Error404 from './pages/Error404'
 import { LoginInvitado } from './pages/Auth/LoginInvitado'
+import { PrivateApp } from './layouts/PrivateApp'
 
 
 export const App = () => {
