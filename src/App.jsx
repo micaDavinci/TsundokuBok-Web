@@ -18,7 +18,7 @@ import { Register } from './pages/Auth/Register'
 import ProtectedRoute from './context/ProtectedRoute'
 import Error404 from './pages/Error404'
 import { LoginInvitado } from './pages/Auth/LoginInvitado'
-import { PrivateApp } from './layouts/PrivateApp'
+import { PrivateApp } from './Layouts/PrivateApp'
 
 
 export const App = () => {
