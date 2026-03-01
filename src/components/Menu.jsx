@@ -75,15 +75,6 @@ export const Menu = ({ show, onClose }) => {
           )}
 
 
-
-          {hasRole([admin]) && (
-            <>
-              <Nav.Link as={Link} to="/mi-biblioteca/usuarios" className="align-items-center color-rosaT link-nav">
-                <i className="bi bi-person-lines-fill"> Usuarios</i>
-              </Nav.Link>
-            </>
-          )}
-
         </Nav>
       </Offcanvas.Body>
 

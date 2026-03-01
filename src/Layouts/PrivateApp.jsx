@@ -140,23 +140,6 @@ export const PrivateApp = () => {
                                     <Prestamo />
                                 </ProtectedRoute>}
                         />
-
-                        {/* Consultas */}
-                        {/* <Route
-                            path='/consultas'
-                            element={
-                                <ProtectedRoute allowedRoles={[admin]}>
-                                    <Consultas />
-                                </ProtectedRoute>}
-                        /> */}
-
-                        <Route
-                            path='/usuarios'
-                            element={
-                                <ProtectedRoute allowedRoles={[admin]}>
-                                    <Usuarios />
-                                </ProtectedRoute>}
-                        />
                     </Routes>
                 </Container>
             </main>
