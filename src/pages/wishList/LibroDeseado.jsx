@@ -231,7 +231,7 @@ export const LibroDeseado = ({ wishListId }) => {
                                     <Form.Select
                                         value={nuevaPrioridad}
                                         onChange={(e) => setNuevaPrioridad(e.target.value)}>
-                                        <option>[Seleccionar prioridad]</option>
+                                        <option value="">[Seleccionar prioridad]</option>
                                         <option value="ALTA">Alta</option>
                                         <option value="MEDIA">Media</option>
                                         <option value="BAJA">Baja</option>
