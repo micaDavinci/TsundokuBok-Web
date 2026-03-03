@@ -65,11 +65,11 @@ export const AgregarLibro = () => {
 
                 seTtitulo(info.title || "");
                 setAutor(info.authors?.join(", ") || "");
-                setPaginas(info.pageCount || "");
+                setPaginas(info.pageCount || null);
                 setIdioma(info.language || "");
                 setSinopsis(limpiarHTML(info.description || ""));
                 setGenero(info.categories?.join(", ") || "");
-                setEdicion(anio);
+                setEdicion(anio || null);
                 setPortadaGoogle(info.imageLinks?.thumbnail || "");
                 // setEdicion(info.publishedDate || "");
 

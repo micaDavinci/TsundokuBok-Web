@@ -170,7 +170,7 @@ export const LibroDeseado = ({ wishListId }) => {
                                             <Card.Img
                                                 src={
                                                     libro.portada
-                                                        ? `${server}/uploads/portadas/${libro.portada}`
+                                                        ? libro.portada
                                                         : libro.portadaGoogle
                                                             ? libro.portadaGoogle
                                                             : `${server}/uploads/portadas/default-cover.jpg`
