@@ -48,10 +48,9 @@ export const LibroInfo = () => {
             <Row className="mb-4">
                 <Col sm={12} md={3} lg={3}>
                     <img
-
                         src={
                             LibroInfo.portada
-                                ? `${server}/uploads/portadas/${LibroInfo.portada}`
+                                ? LibroInfo.portada
                                 : LibroInfo.portadaGoogle
                                     ? LibroInfo.portadaGoogle
                                     : `${server}/uploads/portadas/default-cover.jpg`
@@ -82,10 +81,6 @@ export const LibroInfo = () => {
                             <h4 className="color-verdeO">Fecha de lectura</h4>
                             <Col><p className="ps-4 color-rosaT">Fecha de inicio:  {LibroInfo.inicio ? new Date(LibroInfo.inicio).toLocaleDateString('es-AR') : '-'}</p></Col>
                             <Col><p className="color-rosaT">Fecha de Fin:   {LibroInfo.fin ? new Date(LibroInfo.inicio).toLocaleDateString('es-AR') : '-'}</p></Col>
-                        </Row>
-                        <Row className="mb-3">
-                            <h4 className="color-verdeO">Formato</h4>
-                            <p className="ps-4 color-rosaT">{LibroInfo.formato}</p>
                         </Row>
                         <Row className="mb-3">
                             <h4 className="color-verdeO">Reseña</h4>

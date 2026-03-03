@@ -14,7 +14,6 @@ export const LibroEdit = () => {
     const [formData, setformData] = useState({
         titulo: "",
         autor: "",
-        formato: "",
         opinion: "",
         nota: "",
         edicion: "",
@@ -44,12 +43,11 @@ export const LibroEdit = () => {
                 setformData({
                     titulo: libro.titulo ?? "",
                     autor: libro.autor ?? "",
-                    formato: libro.formato ?? "",
                     opinion: libro.opinion ?? "",
                     nota: libro.nota ?? "",
-                    edicion: libro.edicion ?? "",
+                    edicion: libro.edicion ?? null,
                     idioma: libro.idioma ?? "",
-                    paginas: libro.paginas ?? "",
+                    paginas: libro.paginas ?? null,
                     genero: libro.genero ?? "",
                     sinopsis: libro.sinopsis ?? "",
                     fin: libro.fin ?? "",
@@ -183,18 +181,6 @@ export const LibroEdit = () => {
                                         />
                                     </FloatingLabel>
                                 </Col>
-                            </Row>
-
-                            <Row className="mb-3">
-                                <Form.Group className="mb-3" controlId="formFormato">
-                                    <Form.Label>Formato</Form.Label>
-                                    <Form.Select aria-label="Default select example">
-                                        <option>[Seleccionar]</option>
-                                        <option value="1">Físico</option>
-                                        <option value="2">Ebook</option>
-                                        <option value="3">Audio libro</option>
-                                    </Form.Select>
-                                </Form.Group>
                             </Row>
 
                             <Row className="mb-3">

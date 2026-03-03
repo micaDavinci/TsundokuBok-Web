@@ -107,7 +107,7 @@ export const LibroPrestado = ({ prestamo, getPrestamoList }) => {
                                 <Card.Img
                                     src={
                                         portada
-                                            ? `${server}/uploads/portadas/${portada}`
+                                            ? portada
                                             : portadaGoogle
                                                 ? portadaGoogle
                                                 : `${server}/uploads/portadas/default-cover.jpg`
