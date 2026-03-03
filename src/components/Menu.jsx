@@ -65,9 +65,6 @@ export const Menu = ({ show, onClose }) => {
             </>
           )}
 
-
-
-
           {[admin, guest].includes(user?.role) && (
             <Nav.Link as={Link} to="/mi-biblioteca/invitado" className="align-items-center color-rosaT link-nav">
               <i className="bi bi-person-heart"> Invitado</i>
