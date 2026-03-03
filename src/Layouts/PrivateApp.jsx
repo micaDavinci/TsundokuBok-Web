@@ -11,15 +11,11 @@ import { ListaDeDeseo } from '../pages/wishList/ListaDeDeseo'
 import { Prestamo } from '../pages/Prestamo/Prestamo'
 import { LibroInfo } from '../pages/Biblioteca/LibroInfo'
 import { LibroEdit } from '../pages/Biblioteca/LibroEdit'
-import { Footer } from '../components/Footer'
-import { Nav } from '../components/Nav'
 import { NuevoLibro } from '../pages/NuevoLibro/NuevoLibro';
 import { AgregarLibro } from '../pages/NuevoLibro/AgregarLibro';
 import { BuscarLibro } from '../pages/NuevoLibro/BuscarLibro';
 import { Amigos } from '../pages/Amigos/Amigos';
 import { Invitados } from '../pages/Amigos/Invitados';
-import { Consultas } from '../pages/Admin/Consultas';
-import { Usuarios } from '../pages/Admin/Usuarios';
 import ProtectedRoute from '../context/ProtectedRoute';
 
 export const PrivateApp = () => {

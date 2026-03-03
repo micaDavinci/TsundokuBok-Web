@@ -22,7 +22,7 @@ export const Nav = ({ onMenuOpen }) => {
                     <i className="bi bi-list"></i>
                 </Button>
 
-                <Navbar.Brand as={Link} to="/">
+                <Navbar.Brand onClick={handleLogout} to="/">
                     <img src="../img/logo.png" alt="Logo" height="30" className="d-inline-block align-text-top" />
                     <span className="color-rosaT"> Tsundoku</span>
                     <span className="color-verdeB">Bok</span>
