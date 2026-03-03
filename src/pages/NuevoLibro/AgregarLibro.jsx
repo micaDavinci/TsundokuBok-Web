@@ -30,9 +30,9 @@ export const AgregarLibro = () => {
     const [segundoValor, setSegundoValor] = useState("");
 
     const prioridades = [
-        { id: "alta", nombre: "Alta" },
-        { id: "media", nombre: "Media" },
-        { id: "baja", nombre: "Baja" }
+        { id: "ALTA", nombre: "ALTA" },
+        { id: "MEDIA", nombre: "MEDIA" },
+        { id: "BAJA", nombre: "BAJA" }
     ];
 
 
@@ -65,11 +65,11 @@ export const AgregarLibro = () => {
 
                 seTtitulo(info.title || "");
                 setAutor(info.authors?.join(", ") || "");
-                setPaginas(info.pageCount || null);
+                setPaginas(info.pageCount);
                 setIdioma(info.language || "");
                 setSinopsis(limpiarHTML(info.description || ""));
                 setGenero(info.categories?.join(", ") || "");
-                setEdicion(anio || null);
+                setEdicion(anio);
                 setPortadaGoogle(info.imageLinks?.thumbnail || "");
                 // setEdicion(info.publishedDate || "");
 
@@ -230,7 +230,7 @@ export const AgregarLibro = () => {
                     <Col>
                         <Form.Group className="mb-3" controlId="formEstante">
                             <Form.Label>
-                                {destino === "2" ? "prioridad" : "ubicacion"}
+                                {destino === "2" ? "Prioridad" : "Estante"}
                             </Form.Label>
 
                             <Form.Select
