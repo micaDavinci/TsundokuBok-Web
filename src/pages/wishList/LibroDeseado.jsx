@@ -89,6 +89,7 @@ export const LibroDeseado = ({ wishListId }) => {
 
     const hanldeEditarPrioridad = async () => {
         try {
+            console.log("Nueva prioridad enviada:", nuevaPrioridad);
             const request = await api.put(`/editar-prioridad/${selectedLibro.id_libro}`,
                 {
                     prioridad: nuevaPrioridad
@@ -146,6 +147,7 @@ export const LibroDeseado = ({ wishListId }) => {
 
     const handleShowPriority = (libro) => {
         setSelectedLibro(libro);
+        setNuevaPrioridad(libro.prioridad);
         setActiveModal("priority");
     }
 
@@ -232,9 +234,9 @@ export const LibroDeseado = ({ wishListId }) => {
                                         value={nuevaPrioridad}
                                         onChange={(e) => setNuevaPrioridad(e.target.value)}>
                                         <option value="">[Seleccionar prioridad]</option>
-                                        <option value="ALTA">Alta</option>
-                                        <option value="MEDIA">Media</option>
-                                        <option value="BAJA">Baja</option>
+                                        <option value="ALTA">ALTA</option>
+                                        <option value="MEDIA">MEDIA</option>
+                                        <option value="BAJA">BAJA</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Form>
