@@ -58,7 +58,11 @@ export const LibroEdit = () => {
             }
         } catch (error) {
             console.error(error);
-            alert("Ha surgido un error, por favor intente más tarde");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
         }
     }
 
@@ -88,7 +92,11 @@ export const LibroEdit = () => {
             }
         } catch (error) {
             console.error(error);
-            alert("Ha surgido un error, por favor intente más tarde");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
         }
     }
 
@@ -125,7 +133,7 @@ export const LibroEdit = () => {
                                 placeholder="Título"
                                 value={formData.titulo}
                                 name="titulo"
-                                onChange={handlePortadaChange} />
+                                onChange={handleChange} />
                         </Form.Group>
                     </Col>
                     <Col sm={12} md={6} lg={6}>
