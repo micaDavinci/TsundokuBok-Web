@@ -7,30 +7,35 @@ import { api } from "../../api/axios"
 import "./login.css"
 
 export const LoginInvitado = () => {
-    const {login} = useAuth();
-        const navigate = useNavigate()
+    const { login } = useAuth();
+    const navigate = useNavigate()
 
-        const [email, setEmail] = useState("");
-        const [biblioteca, setBiblioteca] = useState("");
+    const [email, setEmail] = useState("");
+    const [biblioteca, setBiblioteca] = useState("");
 
-        const handleLogin = async () => {
-            try {
-                const request = await api.post("/login-invitado", {
-                    email,
-                    biblioteca
-                }); 
-                if (request.data.success) {
-                    login(request.data);
-                    navigate("/mi-biblioteca/invitado");
-                }
-                alert(request.data.message);
-            } catch {
-                alert("Ha surgido un error, por favor intente más tarde");
-
+    const handleLogin = async () => {
+        try {
+            const request = await api.post("/login-invitado", {
+                email,
+                biblioteca
+            });
+            if (request.data.success) {
+                login(request.data);
+                navigate("/mi-biblioteca/invitado");
             }
+            alert(request.data.message);
+        } catch (error) {
+            console.error(error);
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
+
         }
-    
-    return(
+    }
+
+    return (
 
         <div className="login-wrapper">
             <Container className="login-container">

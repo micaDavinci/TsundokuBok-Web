@@ -34,7 +34,11 @@ export const LibroList = ({ libro, refreshEstante }) => {
             }
         } catch (error) {
             console.error(error);
-            alert("Ha surgido un error al recuperar los estantes, por favor intente más tarde");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
         }
     }
 
@@ -60,7 +64,11 @@ export const LibroList = ({ libro, refreshEstante }) => {
             }
         } catch (error) {
             console.error(error);
-            alert("Ha surgido un error al mover el libro, por favor intente más tarde");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
         }
     }
 
@@ -87,6 +95,11 @@ export const LibroList = ({ libro, refreshEstante }) => {
 
         } catch (error) {
             console.error(error);
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
         }
     };
 

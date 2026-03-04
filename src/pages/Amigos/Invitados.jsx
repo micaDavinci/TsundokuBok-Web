@@ -31,7 +31,11 @@ export const Invitados = () => {
             }
         } catch (error) {
             console.error(error);
-            alert("Ha surgido un error, por favor intente más tarde");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
         }
     }
 
@@ -56,7 +60,11 @@ export const Invitados = () => {
             }
         } catch (error) {
             console.error(error);
-            alert("Ha surgido un error, por favor intente más tarde");
+            if (error.response && error.response.data && error.response.data.message) {
+                alert(error.response.data.message);
+            } else {
+                alert("Ha surgido un error, por favor intente más tarde");
+            }
         }
     }
 

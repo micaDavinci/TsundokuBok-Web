@@ -9,16 +9,16 @@ export const BuscarLibro = () => {
     const [books, setBooks] = useState([]);
 
     const buscarLibro = async () => {
-    try {
-        const res = await api.get("/buscar-libros", {
-            params: { q: query }
-        });
+        try {
+            const res = await api.get("/buscar-libros", {
+                params: { q: query }
+            });
 
-        setBooks(res.data); // axios ya lo parsea
-    } catch (error) {
-        console.error(error);
-    }
-};
+            setBooks(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
     return (
         <>
             <h1 className='mb-4'>Buscar libro</h1>
